@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from '../cocktails/Card'
+import Card from '../meals/Card'
 import axios from 'axios'
 import {Link } from 'react-router-dom'
 
@@ -42,7 +42,7 @@ class Home extends React.Component {
           <div className="hero-body">
             <div className="container">
               <div className="columns is-multiline">
-                <div className="column is-one-third-desktop">
+                <div className="column is-one-third-desktop has-text-centered">
                   <h1 className="title is-1">MealBored</h1>
                   <h2 className="subtitle is-4"> 🍸A place for bored meal lovers</h2>
                   <div className="field has add-ons">
@@ -50,9 +50,7 @@ class Home extends React.Component {
                       <input type="text" placeholder="Search your favourite ingredient" className="input" onChange={this.handleChange}/>
                     </form>
                   </div>
-                </div>
-                <div className="column is-one-third-desktop is-one-half-tablet is-offset-4">
-                  <br />
+                  <hr />
                   <h1 className="subtitle is-2 has-text-weight-light"> Meal of the Day!</h1>
                   <Link to={`/meals/${this.state.randomMeal.idMeal}`}>
                     <Card
@@ -60,11 +58,8 @@ class Home extends React.Component {
                       image={this.state.randomMeal.strMealThumb}
                     />
                   </Link>
-                  <br />
                 </div>
               </div>
-
-
             </div>
           </div>
         </section>
@@ -72,7 +67,7 @@ class Home extends React.Component {
         <footer className="footer">
           <div className="content has-text-centered">
             <p>
-              <strong>CocktailBored</strong> by <a href="https://jgthms.com">Alexis </a> and <a href="https://github.com/Iamshola">  Shola </a>
+              <strong>MealBored</strong> by <a href="https://github.com/Iamshola"> Shola</a>
             </p>
           </div>
         </footer>

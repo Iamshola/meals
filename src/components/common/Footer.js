@@ -16,7 +16,7 @@ class Footer extends React.Component {
       <footer className="footer is-fixed-bottom">
         <div className="content has-text-centered">
           <p>
-            <strong>CocktailBored</strong> by <a href="https://jgthms.com">Alexis and Shola</a>
+            <strong>MealBored</strong> by <a href="https://github.com/Iamshola"> Shola</a>
           </p>
         </div>
       </footer>

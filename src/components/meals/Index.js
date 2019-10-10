@@ -46,35 +46,59 @@ class MealsIndex extends React.Component {
 
 
   render(){
-    console.log(this.state)
     if(!this.state.meals) return <div className="container"><h2>No result found. Return <Link to="/">home </Link> </h2> </div>
     return(
       <section className="section">
         <div className="container">
-          <div className="field">
-            <input placeholder="Search your favourite food" className="input" onKeyUp={this.handleKeyUp}/>
-          </div>
+          <hr />
+        </div>
+        <div className="container">
+          <div className="columns">
+            <div className="column is-2">
 
-          <label> Alphabetical Order:  </label>
-          <select onChange={this.handleChange}>
-            <option value="strMeal|asc">A-Z </option>
-            <option value="strMeal|desc">Z-A </option>
-          </select>
-          <br />
-          <br />
+              <div className="field">
+                <h1 className="title is-6 heading">Your search currently matches {this.filterMeals().length} Meals</h1>
+                <hr />
+                <label className="label has-text-left title is-6 heading">Search your favourites</label>
 
-          <div className="columns is-multiline">
-            {this.filterMeals().map(meal =>
-              <div className="column is-half-tablet is-one-quarter-desktop"
-                key={meal.idMeal}
-              >
-                <Link to={`/meals/${meal.idMeal}`}>
-                  <Card name={meal.strMeal} image={meal.strMealThumb}/>
-                </Link>
+                <input className="input" type="text" placeholder="Favourite space?"  onKeyUp={this.handleKeyUp}/>
+
+                <div className="field">
+                  <hr />
+                  <label> Alphabetical Order:  </label>
+                  <select onChange={this.handleChange}>
+                    <option value="strMeal|asc">A-Z </option>
+                    <option value="strMeal|desc">Z-A </option>
+                  </select>
+                  <br />
+                  <br />
+
+                </div>
+                <hr />
+                <div className="field">
+
+                </div>
+
               </div>
-            )}
+            </div>
+
+            <div className="column">
+              <div className="columns is-multiline">
+                {this.filterMeals().map(meal =>
+                  <div className="column is-half-tablet is-one-quarter-desktop"
+                    key={meal.idMeal}
+                  >
+                    <Link to={`/meals/${meal.idMeal}`}>
+                      <Card name={meal.strMeal} image={meal.strMealThumb}/>
+                    </Link>
+                  </div>
+                )}
+
+              </div>
+            </div>
           </div>
         </div>
+
       </section>
     )
   }
