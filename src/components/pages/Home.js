@@ -19,10 +19,6 @@ class Home extends React.Component {
         this.setState({ randomMeal: res.data.meals[0] })
       })
 
-    // axios.get('https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic')
-    //   .then(res => {
-    //     this.setState({ alcoholicCocktails: res.data.drinks })
-    //   })
   }
 
   handleChange(e){
@@ -42,7 +38,7 @@ class Home extends React.Component {
           <div className="hero-body">
             <div className="container">
               <div className="columns is-multiline">
-                <div className="column is-one-third-desktop has-text-centered">
+                <div className="column is-one-third-desktop has-text-centered is-offset-4">
                   <h1 className="title is-1">MealBored</h1>
                   <h2 className="subtitle is-4"> 🍸A place for bored meal lovers</h2>
                   <div className="field has add-ons">

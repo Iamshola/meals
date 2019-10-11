@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import ReactPlayer from 'react-player'
+import CocktailCard from './cocktailMatch/cocktailCard'
 
 class ShowMeal extends React.Component {
   constructor(){
@@ -22,11 +23,14 @@ class ShowMeal extends React.Component {
     return(
       <div className="container">
         <section className="section">
+          
           <div className="columns">
             <div className="column">
               <figure className="image">
                 <img src={this.state.meal.strMealThumb} alt={this.state.meal.strMeal} />
               </figure>
+              <br />
+              
             </div>
             <div className="column">
               <div className="title is-1">{this.state.meal.strMeal}</div>
@@ -61,6 +65,7 @@ class ShowMeal extends React.Component {
           </div>
 
           <h2 className="subtitle is-4">Many thanks to: {this.state.meal.strSource}</h2>
+          <CocktailCard />
         </section>
       </div>
     )
