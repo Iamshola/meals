@@ -4,6 +4,7 @@ import Card from './Card'
 import _ from 'lodash'
 import {Link } from 'react-router-dom'
 
+
 class MealsIndex extends React.Component {
   constructor(){
     super()
@@ -11,16 +12,19 @@ class MealsIndex extends React.Component {
       meals: [],
       searchTerm: '',
       sortTerm: 'name|asc',
-      selectedOption: ''
+      selectedTerm: '', 
+      ingredients: ''
+      
     }
     this.handleKeyUp = this.handleKeyUp.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.filterMeals = this.filterMeals.bind(this)
+    this.handleSelected = this.handleSelected.bind(this)
   }
 
   componentDidMount(){
     axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?i=' + this.props.match.params.meal)
-      .then(res => this.setState({ meals: res.data.meals }))
+      .then(res => this.setState({ meals: res.data.meals, ingredients: res.data.meals.strIngredient1 }))
   }
 
   handleKeyUp(e){
@@ -31,14 +35,20 @@ class MealsIndex extends React.Component {
     this.setState({ sortTerm: e.target.value})
   }
 
+  handleSelected(e){
+    this.setState({ selectedTerm: e.target.value})
+  }
+
 
   filterMeals(){
     const re = new RegExp(this.state.searchTerm, 'i')
     const [field, order] = this.state.sortTerm.split('|')
-
+    const checkbox = this.state.selectedTerm.ingredients
+    
     const filterMeals = _.filter(this.state.meals, meal => {
-      return re.test(meal.strMeal)
+      return re.test(meal.strMeal) || checkbox.test(meal.strMeal) 
     })
+
     const sortedMeals = _.orderBy(filterMeals, [field], [order])
 
     return sortedMeals
@@ -46,7 +56,9 @@ class MealsIndex extends React.Component {
 
 
   render(){
-    if(!this.state.meals) return <div className="container"><h2>No result found. Return <Link to="/">home </Link> </h2> </div>
+    
+    if (!this.state.meals) return <div className="container"><h2>No result found. Return <Link to="/">home </Link> </h2> </div>
+   
     return(
       <section className="section">
         <div className="container">
@@ -75,6 +87,15 @@ class MealsIndex extends React.Component {
 
                 </div>
                 <hr />
+                <label> This Product Contains: </label>
+                <form onChange={this.handleChange}>
+                  <div className="checkbox">
+                    <label> <input type="checkbox" value="onion" onChange={this.handleSelected} /> onion </label>
+                    <label> <input type="checkbox" value="eggs" onChange={this.handleSelected} /> Eggs </label>
+                  </div>
+                </form> 
+
+                
                 <div className="field">
 
                 </div>
