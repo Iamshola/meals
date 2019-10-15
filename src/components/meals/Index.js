@@ -56,6 +56,7 @@ class MealsIndex extends React.Component {
 
 
   render(){
+    console.log(this.state.meals)
     
     if (!this.state.meals) return <div className="container"><h2>No result found. Return <Link to="/">home </Link> </h2> </div>
    

@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import {Link, withRouter } from 'react-router-dom'
 
 
@@ -33,6 +32,7 @@ class Navbar extends React.Component {
           </div>
           <div className={`navbar-menu ${this.state.navbarOpen ? 'is-active' : ''} ` }>
             <div className="navbar-end">
+              <Link to="/categories" className="navbar-item"> Category </Link>
             </div>
           </div>
         </div>
