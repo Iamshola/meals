@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "webpack-dev-server --mode=development",
-    "build": "webpack -p"
+    "build": "webpack -p",
+    "deploy": "yarn build && gh-pages -d dist"
   },
   "repository": "git@github.com:Iamshola/meals.git",
   "author": "Adesola Oni-Shogbonyo <s.oni-shogbonyo@hotmail.co.uk>",
@@ -22,6 +23,7 @@
     "css-loader": "^3.2.0",
     "eslint": "^6.5.1",
     "eslint-plugin-react": "^7.16.0",
+    "gh-pages": "^2.1.1",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.12.0",
     "react": "^16.10.2",
