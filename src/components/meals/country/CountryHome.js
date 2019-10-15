@@ -1,10 +1,10 @@
 import React from 'react'
-import Card from '../meals/Card'
+import Card from '../Card'
 import axios from 'axios'
-import {Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-class Home extends React.Component {
-  constructor(){
+class CountryHome extends React.Component {
+  constructor() {
     super()
     this.state = {
       searchTerm: ''
@@ -13,7 +13,7 @@ class Home extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentDidMount(){
+  componentDidMount() {
     axios.get('https://www.themealdb.com/api/json/v1/1/random.php')
       .then(res => {
         this.setState({ randomMeal: res.data.meals[0] })
@@ -21,17 +21,17 @@ class Home extends React.Component {
 
   }
 
-  handleChange(e){
+  handleChange(e) {
     this.setState({ searchTerm: e.target.value })
   }
 
-  handleSubmit(){
+  handleSubmit() {
     this.props.history.push('/search/' + this.state.searchTerm)
 
   }
 
-  render(){
-    if(!this.state.randomMeal) return <h2>Loading...</h2>
+  render() {
+    if (!this.state.randomMeal) return <h2>Loading...</h2>
     return (
       <div>
         <section className="hero is-fullheight-with-navbar is-bold bg-hero">
@@ -41,7 +41,7 @@ class Home extends React.Component {
               <h2 className="subtitle is-4"> A place for bored meal lovers</h2>
               <div className="field has add-ons">
                 <form onSubmit={this.handleSubmit}>
-                  <input type="text" placeholder="Search your favourite ingredient" className="input is-rounded" onChange={this.handleChange}/>
+                  <input type="text" placeholder="Search your favourite ingredient" className="input is-rounded" onChange={this.handleChange} />
                 </form>
               </div>
               <hr />
@@ -57,24 +57,24 @@ class Home extends React.Component {
               <h2 className="subtitle">
                 We are a social enterprise providing meal ideas.
                 Assumenda ratione quos, nihil laboriosam illum laudantium molestias id.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                Reprehenderit blanditiis obcaecati ducimus consequatur porro! 
-                Eum deserunt, repellat voluptatum dolor possimus odit! 
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Reprehenderit blanditiis obcaecati ducimus consequatur porro!
+                Eum deserunt, repellat voluptatum dolor possimus odit!
                 Assumenda ratione quos, nihil laboriosam illum laudantium molestias id.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                Reprehenderit blanditiis obcaecati ducimus consequatur porro! 
-                Eum deserunt, repellat voluptatum dolor possimus odit! 
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Reprehenderit blanditiis obcaecati ducimus consequatur porro!
+                Eum deserunt, repellat voluptatum dolor possimus odit!
                 Assumenda ratione quos, nihil laboriosam illum laudantium molestias id.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                Reprehenderit blanditiis obcaecati ducimus consequatur porro! 
-                Eum deserunt, repellat voluptatum dolor possimus odit! 
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Reprehenderit blanditiis obcaecati ducimus consequatur porro!
+                Eum deserunt, repellat voluptatum dolor possimus odit!
                 Assumenda ratione quos, nihil laboriosam illum laudantium molestias id.
               </h2>
             </div>
           </div>
         </section>
 
-        
+
         <section className="hero">
           <div className="hero-body">
             <div className="container">
@@ -97,21 +97,6 @@ class Home extends React.Component {
           </div>
         </section>
 
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         <footer className="footer">
           <div className="content has-text-centered">
@@ -126,4 +111,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home
+export default CountryHome

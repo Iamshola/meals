@@ -9,6 +9,8 @@ import Navbar from './components/common/Navbar'
 import './style.scss'
 import CategoryIndex from './components/meals/CategoryIndex'
 import CategoryShow from './components/meals/CategoryShow'
+import CountryHome from './components/meals/country/CountryHome'
+
 
 
 class App extends React.Component {
@@ -22,6 +24,7 @@ class App extends React.Component {
       <div>
         <HashRouter>
           <Navbar />
+          <Route path="/countries" component={CountryHome} />
           <Route path="/categories/:id" component={CategoryShow} />
           <Route path="/meals/:id" component={ShowMeal} />
           <Route path="/search/:meal" component={MealsIndex} />
