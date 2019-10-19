@@ -1,5 +1,6 @@
 import React from 'react'
 import Card from '../meals/Card'
+import Box from '../meals/Box'
 import axios from 'axios'
 import {Link } from 'react-router-dom'
 
@@ -36,8 +37,8 @@ class Home extends React.Component {
       <div>
         <section className="hero is-fullheight-with-navbar is-bold bg-hero">
           <div className="hero-body">
-            <div className="column is-one-third-desktop has-text-centered is-offset-7">
-              <h1 className="title is-1">MealBored</h1>
+            <div className="column is-one-third-desktop has-text-centered is-offset-8">
+              <h1 className="title is-1 heading">MealBored</h1>
               <h2 className="subtitle is-4"> A place for bored meal lovers</h2>
               <div className="field has add-ons">
                 <form onSubmit={this.handleSubmit}>
@@ -48,7 +49,7 @@ class Home extends React.Component {
             </div>
           </div>
         </section>
-        <section className="hero is-medium is-primary is-bold">
+        <section className="hero is-medium is-primary is-warning">
           <div className="hero-body">
             <div className="container">
               <h1 className="title">
@@ -78,46 +79,47 @@ class Home extends React.Component {
         <section className="hero">
           <div className="hero-body">
             <div className="container">
-              <h1 className="title is-2"> Meal of the Day!</h1>
+              <h1 className="title is-2 has-text-centered"> Try This!</h1>
+              <hr />
               <div className="columns">
-                <div className="column is-one-quarter-desktop">
+                <div className="column has-text-centered home-random-text">
                   <Link to={`/meals/${this.state.randomMeal.idMeal}`}>
-                    <Card
-                      name={this.state.randomMeal.strMeal}
-                      image={this.state.randomMeal.strMealThumb}
-                    />
+                    <p className="title is-2">{this.state.randomMeal.strMeal}</p>
                   </Link>
                 </div>
-                <div className="column has-text-centered is-offset-3">
-                  <h1 className="title is-4">Instructions:</h1>
-                  <p>{this.state.randomMeal.strInstructions}</p>
+
+                <div className="column is-half-desktop">
+                  <Box
+                    name={this.state.randomMeal.strMeal}
+                    strYoutube={this.state.randomMeal.strYoutube}
+                  />
                 </div>
+               
               </div>
             </div>
           </div>
         </section>
 
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <footer className="footer">
+        <footer className="footer top">
           <div className="content has-text-centered">
-            <p>
+            <div className="column is-one-third-desktop has-text-centered is-offset-5">
+              <div className="field has-addons">
+                <div className="control">
+                  <input className="input" type="text" placeholder="Your Email Address" />
+                </div>
+                <div className="control">
+                  <a className="button is-info"> Subscribe</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
+
+        <footer className="footer bottom">
+          <div className="content has-text-centered">
+            <div>
               <strong>MealBored</strong> by <a href="https://github.com/Iamshola"> Shola</a>
-            </p>
+            </div>
           </div>
         </footer>
       </div>

@@ -20,7 +20,7 @@ class Navbar extends React.Component {
   }
   render(){
     return(
-      <nav className="navbar is-primary is-fixed-top">
+      <nav className="navbar is-warning is-fixed-top">
         <div className="container">
           <div className="navbar-brand">
             <Link to= "/" className="navbar-item"> Home </Link>

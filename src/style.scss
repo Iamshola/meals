@@ -11,16 +11,27 @@ iframe#widget2{
 section.hero.is-fullheight-with-navbar.is-bold.bg-hero{
   margin-top: 53px;
   background-image: url('https://i.imgur.com/fxwwrW8.jpg');
+  opacity: 0.7;
   background-size: auto;
   background-repeat: no-repeat;
 
 }
 
+footer.footer.top{
+  padding: 1.2rem 1.5rem 3rem;
+  background-color: #ffdd57;
+}
+
+footer.footer.bottom{
+  padding: 1.2rem 1.5rem 3rem;
+  background-color: #757575;
+}
 
 
 
-
-
+div.column.has-text-centered.home-random-text{
+  padding-top: 200px;
+}
 
 .image.show-page img{
   height:480px !important;

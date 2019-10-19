@@ -34,23 +34,22 @@ class ShowMeal extends React.Component {
           </figure>
           <br />
           <div className="title is-1 has-text-centered">{this.state.meal.strMeal}</div>
-          <h2 className="title is-6 heading has-text-centered">Many thanks to: {this.state.meal.strSource}</h2>
           <p className="title is-5 has-text-centered">{this.state.meal.strTags.split(',').join(', ')}</p>
           <p className="title is-5 has-text-centered">{this.state.meal.strArea}</p>
 
           <hr />
           <p className="title is-3">Ingredients:</p>
 
-          <p>{this.state.meal.strIngredient1}, {this.state.meal.strMeasure1}</p>
-          <p>{this.state.meal.strIngredient2}, {this.state.meal.strMeasure2}</p>
-          <p>{this.state.meal.strIngredient3}, {this.state.meal.strMeasure3}</p>
-          <p>{this.state.meal.strIngredient4}, {this.state.meal.strMeasure4}</p>
-          <p>{this.state.meal.strIngredient5}, {this.state.meal.strMeasure5}</p>
-          <p>{this.state.meal.strIngredient6}, {this.state.meal.strMeasure6}</p>
-          <p>{this.state.meal.strIngredient7}, {this.state.meal.strMeasure7}</p>
-          <p>{this.state.meal.strIngredient8}, {this.state.meal.strMeasure8}</p>
-          <p>{this.state.meal.strIngredient9}, {this.state.meal.strMeasure9}</p>
-          <p>{this.state.meal.strIngredient10}, {this.state.meal.strMeasure10}</p>
+          <p className="has-text-centered">{this.state.meal.strIngredient1}, {this.state.meal.strMeasure1}</p>
+          <p className="has-text-centered">{this.state.meal.strIngredient2}, {this.state.meal.strMeasure2}</p>
+          <p className="has-text-centered">{this.state.meal.strIngredient3}, {this.state.meal.strMeasure3}</p>
+          <p className="has-text-centered">{this.state.meal.strIngredient4}, {this.state.meal.strMeasure4}</p>
+          <p className="has-text-centered">{this.state.meal.strIngredient5}, {this.state.meal.strMeasure5}</p>
+          <p className="has-text-centered">{this.state.meal.strIngredient6}, {this.state.meal.strMeasure6}</p>
+          <p className="has-text-centered">{this.state.meal.strIngredient7}, {this.state.meal.strMeasure7}</p>
+          <p className="has-text-centered">{this.state.meal.strIngredient8}, {this.state.meal.strMeasure8}</p>
+          <p className="has-text-centered">{this.state.meal.strIngredient9}, {this.state.meal.strMeasure9}</p>
+          <p className="has-text-centered">{this.state.meal.strIngredient10}, {this.state.meal.strMeasure10}</p>
 
           <hr />
           <p className="title is-4">Instructions:</p>
