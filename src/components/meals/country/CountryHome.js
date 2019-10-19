@@ -13,13 +13,6 @@ class CountryHome extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentDidMount() {
-    axios.get('https://www.themealdb.com/api/json/v1/1/random.php')
-      .then(res => {
-        this.setState({ randomMeal: res.data.meals[0] })
-      })
-
-  }
 
   handleChange(e) {
     this.setState({ searchTerm: e.target.value })
@@ -36,12 +29,17 @@ class CountryHome extends React.Component {
       <div>
         <section className="hero is-fullheight-with-navbar is-bold">
           <div className="hero-body">
-            <div className="column is-one-third-desktop has-text-centered is-offset-7">
+            <div className="column is-one-third-desktop has-text-centered">
               <h1 className="title is-1">MealBored</h1>
               <h2 className="subtitle is-4"> A place for bored meal lovers</h2>
               <div className="field has add-ons">
                 <form onSubmit={this.handleSubmit}>
-                  <input type="text" placeholder="Search your favourite ingredient" className="input is-rounded" onChange={this.handleChange} />
+                  <input 
+                    type="text" 
+                    placeholder="Search your favourite ingredient" 
+                    className="input is-rounded" 
+                    onChange={this.handleChange} 
+                  />
                 </form>
               </div>
               <hr />
