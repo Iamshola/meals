@@ -19,7 +19,7 @@ class MealsIndex extends React.Component {
     this.handleKeyUp = this.handleKeyUp.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.filterMeals = this.filterMeals.bind(this)
-    this.handleSelected = this.handleSelected.bind(this)
+  
   }
 
   componentDidMount(){
@@ -35,18 +35,16 @@ class MealsIndex extends React.Component {
     this.setState({ sortTerm: e.target.value})
   }
 
-  handleSelected(e){
-    this.setState({ selectedTerm: e.target.value})
-  }
+
 
 
   filterMeals(){
     const re = new RegExp(this.state.searchTerm, 'i')
     const [field, order] = this.state.sortTerm.split('|')
-    const checkbox = this.state.selectedTerm.ingredients
+    
     
     const filterMeals = _.filter(this.state.meals, meal => {
-      return re.test(meal.strMeal) || checkbox.test(meal.strMeal) 
+      return re.test(meal.strMeal)
     })
 
     const sortedMeals = _.orderBy(filterMeals, [field], [order])
