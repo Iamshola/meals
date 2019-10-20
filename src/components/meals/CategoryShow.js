@@ -1,18 +1,20 @@
 import React from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
+import Card from './Card'
 
 
 class CategoryShow extends React.Component {
   constructor() {
     super()
     this.state = {
-      category: {}
+      category: []
     }
   }
 
   componentDidMount() {
-    axios.get(`https://www.themealdb.com/api/json/v1/1/categories.php/${this.props.match.params.id}`)
-      .then(res => this.setState({ category: res.data.categories }))
+    axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?c=' + this.props.match.params.id)
+      .then(res => this.setState({ category: res.data.meals }))
   }
 
 
@@ -22,16 +24,19 @@ class CategoryShow extends React.Component {
     return (
       <div className="container">
         <section className="section">
-          <h1>Hi Show</h1>
-          <figure className="image">
-            <img 
-              src={this.state.category.strCategoryThumb} 
-              alt={this.state.category.strCategory} 
-            />
-          </figure>
-          <br />
-          <div className="title is-1 has-text-centered">{this.state.category.strCategory}</div>
-          <h2 className="title is-6 heading has-text-centered">{this.state.category.strCategoryDescription}</h2>
+          <div className="column">
+            <div className="columns is-multiline">
+              {this.state.category.map(category =>
+                <div className="column is-half-tablet is-one-quarter-desktop"
+                  key={category.idMeal}
+                >
+                  <Link to={`/meals/${category.idMeal}`}>
+                    <Card name={category.strMeal} image={category.strMealThumb} />
+                  </Link>
+                </div>
+              )}
+            </div>
+          </div>
         </section>
       </div>
     )

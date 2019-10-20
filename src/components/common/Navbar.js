@@ -1,8 +1,6 @@
 import React from 'react'
 import {Link, withRouter } from 'react-router-dom'
 
-
-
 class Navbar extends React.Component {
   constructor(){
     super()
@@ -41,9 +39,6 @@ class Navbar extends React.Component {
     )
   }
 
-
-
 }
-
 
 export default withRouter(Navbar)

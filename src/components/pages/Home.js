@@ -108,7 +108,7 @@ class Home extends React.Component {
                   <input className="input" type="text" placeholder="Your Email Address" />
                 </div>
                 <div className="control">
-                  <a className="button is-info"> Subscribe</a>
+                  <a className="button is-light"> Subscribe</a>
                 </div>
               </div>
             </div>

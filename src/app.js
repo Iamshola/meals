@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {HashRouter,  Route } from 'react-router-dom'
+import {HashRouter,  Route, Switch } from 'react-router-dom'
 
 import Home from './components/pages/Home'
 import ShowMeal from './components/meals/Show'
@@ -10,6 +10,7 @@ import './style.scss'
 import CategoryIndex from './components/meals/CategoryIndex'
 import CategoryShow from './components/meals/CategoryShow'
 import CountryHome from './components/meals/country/CountryHome'
+import CountriesIndex from './components/meals/country/CountryIndex'
 
 
 
@@ -24,12 +25,16 @@ class App extends React.Component {
       <div>
         <HashRouter>
           <Navbar />
-          <Route path="/countries" component={CountryHome} />
-          <Route path="/categories/:id" component={CategoryShow} />
-          <Route path="/meals/:id" component={ShowMeal} />
-          <Route path="/search/:meal" component={MealsIndex} />
-          <Route path="/categories" component={CategoryIndex} />
-          <Route exact path="/" component={Home} />
+          <Switch>
+            <Route exact path="/countries/:id" component={ShowMeal} />
+            <Route exact path="/search/countries/:countries" component={CountriesIndex} />
+            <Route path="/categories/:id" component={CategoryShow} />
+            <Route path="/meals/:id" component={ShowMeal} />
+            <Route path="/search/:meal" component={MealsIndex} />
+            <Route exact path="/countries" component={CountryHome} />
+            <Route exact path="/categories" component={CategoryIndex} />
+            <Route exact path="/" component={Home} />
+          </Switch>
         </HashRouter>
 
       </div>

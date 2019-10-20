@@ -7,7 +7,7 @@ class CategoryIndex extends React.Component {
   constructor(){
     super()
     this.state = {
-      category: []
+      categories: []
     }
 
   }
@@ -15,21 +15,23 @@ class CategoryIndex extends React.Component {
 
   componentDidMount() {
     axios.get('https://www.themealdb.com/api/json/v1/1/categories.php')
-      .then(res => this.setState({ category: res.data.categories }))
+      .then(res => this.setState({ categories: res.data.categories }))
   }
   render(){
-    console.log(this.state.category)
-    if (!this.state.category) return <h2>Loading...</h2>
+    console.log(this.state.categories)
+    if (!this.state.categories) return <h2>Loading...</h2>
     return (
       <div className="container">
         <section className="section">
+          <h1 className="title is-1 heading has-text-centered">Category</h1>
+          <hr />
           <div className="column">
             <div className="columns is-multiline">
-              {this.state.category.map(category =>
+              {this.state.categories.map(category =>
                 <div className="column is-half-tablet is-one-quarter-desktop"
                   key={category.idCategory}
                 >
-                  <Link to={`/categories/${category.idCategory}`}>
+                  <Link to={`/categories/${category.strCategory}`}>
                     <Card 
                       name={category.strCategory} 
                       image={category.strCategoryThumb} 
