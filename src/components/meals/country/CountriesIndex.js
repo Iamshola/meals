@@ -35,8 +35,6 @@ class CountriesIndex extends React.Component {
   }
 
 
-
-
   filterCountries() {
     const re = new RegExp(this.state.countrySearchTerm, 'i')
     const [field, order] = this.state.sortTerm.split('|')
@@ -71,7 +69,7 @@ class CountriesIndex extends React.Component {
                 <hr />
                 <label className="label has-text-left title is-6 heading">Search your favourites</label>
 
-                <input className="input" type="text" placeholder="Favourite space?" onKeyUp={this.handleKeyUp} />
+                <input className="input" type="text" placeholder="Favourite meal?" onKeyUp={this.handleKeyUp} />
 
                 <div className="field">
                   <hr />
@@ -102,7 +100,7 @@ class CountriesIndex extends React.Component {
                   <div className="column is-half-tablet is-one-quarter-desktop"
                     key={meal.idMeal}
                   >
-                    <Link to={`/countries/${meal.idMeal}`}>
+                    <Link to={`/meals/${meal.idMeal}`}>
                       <Card name={meal.strMeal} image={meal.strMealThumb} />
                     </Link>
                   </div>

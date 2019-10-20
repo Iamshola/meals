@@ -10,7 +10,7 @@ import './style.scss'
 import CategoryIndex from './components/meals/CategoryIndex'
 import CategoryShow from './components/meals/CategoryShow'
 import CountryHome from './components/meals/country/CountryHome'
-import CountriesIndex from './components/meals/country/CountryIndex'
+import CountriesIndex from './components/meals/country/CountriesIndex'
 
 
 
@@ -27,7 +27,7 @@ class App extends React.Component {
           <Navbar />
           <Switch>
             <Route exact path="/countries/:id" component={ShowMeal} />
-            <Route exact path="/search/countries/:countries" component={CountriesIndex} />
+            <Route exact path="/countries/:countries" component={CountriesIndex} />
             <Route path="/categories/:id" component={CategoryShow} />
             <Route path="/meals/:id" component={ShowMeal} />
             <Route path="/search/:meal" component={MealsIndex} />

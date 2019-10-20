@@ -3,6 +3,7 @@ import Card from '../meals/Card'
 import Box from '../meals/Box'
 import axios from 'axios'
 import {Link } from 'react-router-dom'
+import CountryHome from '../meals/country/CountryHome'
 
 class Home extends React.Component {
   constructor(){
@@ -118,6 +119,7 @@ class Home extends React.Component {
         <footer className="footer bottom">
           <div className="content has-text-centered">
             <div>
+              <CountryHome/>
               <strong>MealBored</strong> by <a href="https://github.com/Iamshola"> Shola</a>
             </div>
           </div>

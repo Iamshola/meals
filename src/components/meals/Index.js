@@ -11,9 +11,7 @@ class MealsIndex extends React.Component {
     this.state = {
       meals: [],
       searchTerm: '',
-      sortTerm: 'name|asc',
-      selectedTerm: '', 
-      ingredients: ''
+      sortTerm: 'name|asc'
       
     }
     this.handleKeyUp = this.handleKeyUp.bind(this)
@@ -24,7 +22,7 @@ class MealsIndex extends React.Component {
 
   componentDidMount(){
     axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?i=' + this.props.match.params.meal)
-      .then(res => this.setState({ meals: res.data.meals, ingredients: res.data.meals.strIngredient1 }))
+      .then(res => this.setState({ meals: res.data.meals}))
   }
 
   handleKeyUp(e){

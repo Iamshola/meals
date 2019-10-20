@@ -1,47 +1,43 @@
 import React from 'react'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
+
+
 
 class CountryHome extends React.Component {
   constructor() {
     super()
     this.state = {
-      countrySearchTerm: ''
+      cuisines: []
     }
-    this.handleCountryChange = this.handleCountryChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-
-  handleCountryChange(e) {
-    this.setState({ countrySearchTerm: e.target.value })
+  componentDidMount() {
+    axios.get('https://www.themealdb.com/api/json/v1/1/list.php?a=list')
+      .then(res => this.setState({ cuisines: res.data.meals }))
   }
 
-  handleSubmit() {
-    this.props.history.push('/search/countries/' + this.state.countrySearchTerm)
-
-  }
-
-  render() {
-   
+  render() {   
     return (
-      <div>
-        <section className="hero is-fullheight-with-navbar is-bold">
-          <div className="hero-body">
-            <div className="column is-one-third-desktop has-text-centered">
-              <h1 className="title is-1 heading">MealBored</h1>
-              <h2 className="subtitle is-4"> A place for bored meal lovers</h2>
-              <div className="field has add-ons">
-                <form onSubmit={this.handleSubmit}>
-                  <input type="text" 
-                    placeholder="Search your favourite cuisine" 
-                    className="input is-rounded"
-                    onChange={this.handleCountryChange} />
-                </form>
-              </div>
+      <section className="section">
+        <h1>Explore By Cuisine</h1>
+        <div className="columns">
+          <div className="column is-half-desktop has-text-centered is-offset-3">
+            <div className="columns is-multiline">
+              {this.state.cuisines.map(meal =>
+                <div className="column is-one-quarter-tablet is-one-quarter-desktop"
+                  key={meal.strArea}
+                >
+                  <Link to={`/countries/${meal.idMeal}`}>
+                    <p className="title is-6 heading"> {meal.strArea} </p>
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
-        </section>
-        
-      </div>
+        </div>
+      </section>
+      
 
     )
   }
