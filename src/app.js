@@ -26,8 +26,8 @@ class App extends React.Component {
         <HashRouter>
           <Navbar />
           <Switch>
+            <Route exact path="/countries/:country" component={CountriesIndex} />
             <Route exact path="/countries/:id" component={ShowMeal} />
-            <Route exact path="/countries/:countries" component={CountriesIndex} />
             <Route path="/categories/:id" component={CategoryShow} />
             <Route path="/meals/:id" component={ShowMeal} />
             <Route path="/search/:meal" component={MealsIndex} />

@@ -22,7 +22,7 @@ class CountriesIndex extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?a=' + this.props.match.params.countries)
+    axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?a=' + this.props.match.params.country)
       .then(res => this.setState({ countries: res.data.meals }))
   }
 
