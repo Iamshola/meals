@@ -21,6 +21,12 @@ class ShowMeal extends React.Component {
       .then(res => this.setState({ meal: res.data.meals[0] }))
   }
 
+  // handleSimilar(){
+  //   const nearbyWorkspaces = this.state.workspaces.filter(workspace => workspace.address_line_2 === this.state.workspace.address_line_2 && workspace.name !== this.state.workspace.name)
+
+  //   return nearbyWorkspaces
+  // }
+
 
 
   render(){
@@ -35,7 +41,10 @@ class ShowMeal extends React.Component {
           <br />
           <div className="title is-1 has-text-centered">{this.state.meal.strMeal}</div>
           <p className="title is-5 has-text-centered">{this.state.meal.strTags.split(',').join(', ')}</p>
-          <p className="title is-5 has-text-centered">{this.state.meal.strArea}</p>
+          <Link to={`/countries/${this.state.meal.strArea}`}>
+            <p className="title is-5 has-text-centered"> {this.state.meal.strArea} </p>
+          </Link>
+         
 
           <hr />
           <p className="title is-3">Ingredients:</p>

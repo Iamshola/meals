@@ -12,7 +12,8 @@ class CountriesIndex extends React.Component {
       countries: [],
       countrySearchTerm: '',
       sortTerm: 'name|asc',
-      selectedTerm: ''
+      selectedTerm: '',
+      ingredients: {}
 
     }
     this.handleKeyUp = this.handleKeyUp.bind(this)
@@ -52,6 +53,7 @@ class CountriesIndex extends React.Component {
 
   render() {
     console.log(this.state.countries)
+    console.log(this.state.ingredients)
 
     if (!this.state.countries) return <div className="container"><h2>No result found. Return <Link to="/">home </Link> </h2> </div>
 

@@ -22,21 +22,21 @@ class CountryHome extends React.Component {
       <section className="section">
         <h1>Explore By Cuisine</h1>
         <hr />
-        <div className="columns">
-          <div className="column is-half-desktop has-text-centered is-offset-3">
-            <div className="columns is-multiline">
-              {this.state.cuisines.map(meal =>
-                <div className="column is-one-quarter-tablet is-one-quarter-desktop"
-                  key={meal.strArea}
-                >
-                  <Link to={`/countries/${meal.strArea}`}>
-                    <p className="title is-6 heading"> {meal.strArea} </p>
-                  </Link>
-                </div>
-              )}
-            </div>
+        <div className="columns is-half-desktop has-text-centered is-offset-3">
+          
+          <div className="columns is-multiline">
+            {this.state.cuisines.map(meal =>
+              <div className="column is-one-quarter-tablet is-one-fifth-desktop"
+                key={meal.strArea}
+              >
+                <Link to={`/countries/${meal.strArea}`}>
+                  <p className="title is-6 heading"> {meal.strArea} </p>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
+       
       </section>
       
 

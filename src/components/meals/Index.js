@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import Card from './Card'
 import _ from 'lodash'
-import {Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 class MealsIndex extends React.Component {
@@ -102,6 +102,7 @@ class MealsIndex extends React.Component {
 
             <div className="column">
               <div className="columns is-multiline">
+                
                 {this.filterMeals().map(meal =>
                   <div className="column is-half-tablet is-one-quarter-desktop"
                     key={meal.idMeal}
