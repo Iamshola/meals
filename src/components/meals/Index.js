@@ -3,13 +3,14 @@ import axios from 'axios'
 import Card from './Card'
 import _ from 'lodash'
 import { Link } from 'react-router-dom'
-
+import { compose } from 'redux'
 
 class MealsIndex extends React.Component {
   constructor(){
     super()
     this.state = {
       meals: [],
+      eachMeal: [],
       searchTerm: '',
       sortTerm: 'name|asc',
       clickTerm: ''
@@ -19,12 +20,25 @@ class MealsIndex extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.filterMeals = this.filterMeals.bind(this)
     this.handleSelected = this.handleSelected.bind(this)
-  
+    this.eachIngredient = this.eachIngredient.bind(this)
   }
 
   componentDidMount(){
     axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?i=' + this.props.match.params.meal)
-      .then(res => this.setState({ meals: res.data.meals}))
+      .then(res => this.setState({ meals: res.data.meals, eachMeal: [] }, () => {
+        this.eachIngredient()
+      })
+      )
+  }
+
+  eachIngredient(){
+    if(this.state.meals){
+      const retrieveId = this.state.meals.map(mealId => mealId.idMeal)
+      retrieveId.map(x =>
+        axios.get('https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + x)
+          .then(res => this.setState({ eachMeal: [...res.data.meals].concat(this.state.eachMeal) }))
+      )
+    } 
   }
 
   handleKeyUp(e){
@@ -36,6 +50,7 @@ class MealsIndex extends React.Component {
   }
 
   handleSelected(e) {
+    
     this.setState({ clickTerm: e.target.value })
   }
 
@@ -44,25 +59,25 @@ class MealsIndex extends React.Component {
   filterMeals(){
     const re = new RegExp(this.state.searchTerm, 'i')
     const [field, order] = this.state.sortTerm.split('|')
-  
-  
+
     const filterMeals = _.filter(this.state.meals, meal => {
       return re.test(meal.strMeal) 
     })
+
 
     const sortedMeals = _.orderBy(filterMeals, [field], [order])
 
     return sortedMeals
   }
 
+  
 
   render(){
-    console.log(this.state.meals)
-    
+    console.log(this.state.eachMeal, 'eachmeal')
+
     if (!this.state.meals) return(
       
       <h2 className="title is-1 heading">No result found. Return <Link to="/">home </Link> </h2> 
-
     )
 
 
