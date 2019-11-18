@@ -11,12 +11,14 @@ class MealsIndex extends React.Component {
     this.state = {
       meals: [],
       searchTerm: '',
-      sortTerm: 'name|asc'
+      sortTerm: 'name|asc',
+      clickTerm: ''
       
     }
     this.handleKeyUp = this.handleKeyUp.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.filterMeals = this.filterMeals.bind(this)
+    this.handleSelected = this.handleSelected.bind(this)
   
   }
 
@@ -33,16 +35,19 @@ class MealsIndex extends React.Component {
     this.setState({ sortTerm: e.target.value})
   }
 
+  handleSelected(e) {
+    this.setState({ clickTerm: e.target.value })
+  }
 
 
 
   filterMeals(){
     const re = new RegExp(this.state.searchTerm, 'i')
     const [field, order] = this.state.sortTerm.split('|')
-    
-    
+  
+  
     const filterMeals = _.filter(this.state.meals, meal => {
-      return re.test(meal.strMeal)
+      return re.test(meal.strMeal) 
     })
 
     const sortedMeals = _.orderBy(filterMeals, [field], [order])
@@ -53,10 +58,14 @@ class MealsIndex extends React.Component {
 
   render(){
     console.log(this.state.meals)
-    console.log('his.state.meals')
     
-    if (!this.state.meals) return <div className="container"><h2>No result found. Return <Link to="/">home </Link> </h2> </div>
-   
+    if (!this.state.meals) return(
+      
+      <h2 className="title is-1 heading">No result found. Return <Link to="/">home </Link> </h2> 
+
+    )
+
+
     return(
       <section className="section">
         <div className="container">
@@ -71,7 +80,7 @@ class MealsIndex extends React.Component {
                 <hr />
                 <label className="label has-text-left title is-6 heading">Search your favourites</label>
 
-                <input className="input" type="text" placeholder="Favourite space?"  onKeyUp={this.handleKeyUp}/>
+                <input className="input" type="text" placeholder="Favourite Meal"  onKeyUp={this.handleKeyUp}/>
 
                 <div className="field">
                   <hr />

@@ -9,29 +9,50 @@ class ShowMeal extends React.Component {
   constructor(){
     super()
     this.state = {
-      meal: [], 
-      meals: []
+      meal: []
     }
+    this.handleIngredients = this.handleIngredients.bind(this)
   }
   
 
 
   componentDidMount(){
     axios.get('https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + this.props.match.params.id)
-      .then(res => this.setState({ meal: res.data.meals[0] }))
+      .then(res => this.setState({ meal: res.data.meals[0] 
+
+      }, () => {
+        this.handleIngredients()
+      })
+      )
   }
 
-  // handleSimilar(){
-  //   const nearbyWorkspaces = this.state.workspaces.filter(workspace => workspace.address_line_2 === this.state.workspace.address_line_2 && workspace.name !== this.state.workspace.name)
 
-  //   return nearbyWorkspaces
-  // }
+  handleIngredients(){
+    const ingredients = [this.state.meal.strIngredient1 , this.state.meal.strIngredient2, this.state.meal.strIngredient3, this.state.meal.strIngredient4, this.state.meal.strIngredient5, this.state.meal.strIngredient6, this.state.meal.strIngredient7, this.state.meal.strIngredient9, this.state.meal.strIngredient10, this.state.meal.strIngredient11, this.state.meal.strIngredient12, this.state.meal.strIngredient13, this.state.meal.strIngredient14]
 
+    const portion = [this.state.meal.strMeasure1, this.state.meal.strMeasure2, this.state.meal.strMeasure3, this.state.meal.strMeasure4, this.state.meal.strMeasure5, this.state.meal.strMeasure6, this.state.meal.strMeasure7, this.state.meal.strMeasure9, this.state.meal.strMeasure10, this.state.meal.strMeasure11, this.state.meal.strMeasure12, this.state.meal.strMeasure13, this.state.meal.strMeasure14]
+
+    if (ingredients.length === portion.length) {
+      var c = []
+      for (var i = 0; i < ingredients.length; i++) {
+        c.push(ingredients[i] + ', ' + portion[i])
+      }
+      console.log(c)
+    }
+
+    const display = c.filter(item => item !== ', ')
+
+    return display 
+    
+  }
 
 
   render(){
+    console.log(this.handleIngredients())
+
     console.log('rendering', this.state.meal)
-    if (!this.state.meal || !this.state.meal.strTags) return <h2>Loading...</h2>
+    if (!this.state.meal || !this.state.meal.strTags) return null
+
     return(
       <div className="container">
         <section className="section">
@@ -49,16 +70,12 @@ class ShowMeal extends React.Component {
           <hr />
           <p className="title is-3">Ingredients:</p>
 
-          <p className="has-text-centered">{this.state.meal.strIngredient1}, {this.state.meal.strMeasure1}</p>
-          <p className="has-text-centered">{this.state.meal.strIngredient2}, {this.state.meal.strMeasure2}</p>
-          <p className="has-text-centered">{this.state.meal.strIngredient3}, {this.state.meal.strMeasure3}</p>
-          <p className="has-text-centered">{this.state.meal.strIngredient4}, {this.state.meal.strMeasure4}</p>
-          <p className="has-text-centered">{this.state.meal.strIngredient5}, {this.state.meal.strMeasure5}</p>
-          <p className="has-text-centered">{this.state.meal.strIngredient6}, {this.state.meal.strMeasure6}</p>
-          <p className="has-text-centered">{this.state.meal.strIngredient7}, {this.state.meal.strMeasure7}</p>
-          <p className="has-text-centered">{this.state.meal.strIngredient8}, {this.state.meal.strMeasure8}</p>
-          <p className="has-text-centered">{this.state.meal.strIngredient9}, {this.state.meal.strMeasure9}</p>
-          <p className="has-text-centered">{this.state.meal.strIngredient10}, {this.state.meal.strMeasure10}</p>
+
+          <ul> 
+            {this.handleIngredients().map((item, index) =>
+              <li key={index}>{item}</li>
+            )}
+          </ul>
 
           <hr />
           <p className="title is-4">Instructions:</p>

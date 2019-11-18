@@ -3,6 +3,7 @@
 }
 
 
+
 iframe#widget2{
   height: 600px;
 }
@@ -13,8 +14,11 @@ section.hero.is-fullheight-with-navbar.is-bold.bg-hero{
   background-image: url('https://i.imgur.com/fxwwrW8.jpg');
   background-size: auto;
   background-repeat: no-repeat;
+   background-color: beige;
 
 }
+
+// section.hero.is-medium.is-primary.is-warning
 
 footer.footer.top{
   padding: 1.2rem 1.5rem 3rem;
@@ -23,7 +27,7 @@ footer.footer.top{
 
 footer.footer.bottom{
   padding: 1.2rem 1.5rem 3rem;
-  background-color: #fae9e9;
+  background-color: #a481fb2d;
 }
 
 
@@ -37,6 +41,7 @@ div.column.has-text-centered.home-random-text{
   width:480px !important;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 20px;
 }
 
 
