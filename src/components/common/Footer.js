@@ -13,7 +13,7 @@ class Footer extends React.Component {
 
   render(){
     return(
-      <footer className="footer is-fixed-bottom">
+      <footer className="footer is-fixed-bottom is-warning">
         <div className="content has-text-centered">
           <p>
             <strong>MealBored</strong> by <a href="https://github.com/Iamshola"> Shola</a>
