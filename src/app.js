@@ -36,7 +36,6 @@ class App extends React.Component {
             <Route exact path="/" component={Home} />
           </Switch>
         </HashRouter>
-
       </div>
     )
   }
