@@ -20,7 +20,7 @@ class Navbar extends React.Component {
     return(
       <nav className="navbar is-warning is-fixed-top">
         <div className="container">
-          <div className="navbar-brand">
+          <div className="navbar-brand title is-6 heading">
             <Link to= "/" className="navbar-item"> Home </Link>
             <a role="button" className={`navbar-burger ${this.state.navbarOpen ? 'is-active' : ''} ` } onClick={this.toggleNavbar}>
               <span aria-hidden="true"></span>
@@ -29,7 +29,7 @@ class Navbar extends React.Component {
             </a>
           </div>
           <div className={`navbar-menu ${this.state.navbarOpen ? 'is-active' : ''} ` }>
-            <div className="navbar-end">
+            <div className="navbar-end title is-6 heading">
               <Link to="/categories" className="navbar-item"> Category </Link>
               
             </div>

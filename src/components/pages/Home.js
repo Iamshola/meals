@@ -5,6 +5,8 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import CountryHome from '../meals/country/CountryHome'
 
+import Navbar from  '../common/Navbar'
+
 class Home extends React.Component {
   constructor(){
     super()
@@ -36,6 +38,7 @@ class Home extends React.Component {
     if(!this.state.randomMeal) return <h2>Loading...</h2>
     return (
       <div>
+        <Navbar />
         <section className="hero is-fullheight-with-navbar is-bold bg-hero">
           <div className="hero-body">
             <div className="column has-text-centered">
@@ -80,7 +83,7 @@ class Home extends React.Component {
         </section>
 
         
-        <section className="hero">
+        <section className="hero is-medium">
           <div className="hero-body">
             <div className="container">
               <h1 className="title is-2 has-text-centered"> Try This!</h1>
@@ -104,22 +107,7 @@ class Home extends React.Component {
           </div>
         </section>
 
-        <footer className="footer top is-warning">
-          <div className="content has-text-centered">
-            <div className="column is-one-third-desktop has-text-centered is-offset-5">
-              <div className="field has-addons">
-                <div className="control">
-                  <input className="input" type="text" placeholder="Your Email Address" />
-                </div>
-                <div className="control">
-                  <a className="button is-light"> Subscribe</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </footer>
-
-        <footer className="footer bottom is-warning">
+        <footer className="footer bottom">
           <div className="content has-text-centered">
             <div>
               <CountryHome/>
