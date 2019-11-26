@@ -1,6 +1,6 @@
 import React from 'react'
 
-const RadioButtons = ({ name, image }) => {
+const Filters = ({ name, image }) => {
   return (
     <div>
    
@@ -8,4 +8,5 @@ const RadioButtons = ({ name, image }) => {
 
   )
 }
-export default RadioButtons
+export default Filters 
+

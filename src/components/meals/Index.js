@@ -4,6 +4,7 @@ import Card from './Card'
 import _ from 'lodash'
 import { Link } from 'react-router-dom'
 import Loading from '../common/Error404'
+import Checkboxes from './indexPageTools/Checkboxes'
 
 class MealsIndex extends React.Component {
   constructor(){
@@ -103,7 +104,10 @@ class MealsIndex extends React.Component {
     if (!this.state.meals || this.filterMeals().length === 0 ) return( 
       <Loading />
     )
-  
+
+    if (this.filterMeals().length === 0) return (
+      <Loading />
+    )
 
     return(
       <section className="section">
@@ -134,64 +138,11 @@ class MealsIndex extends React.Component {
 
                 <hr />
                 <label> This Product Contains: </label>
-                <form onChange={this.handleChange}>
-                  <div className="checkbox">
-                    <label className="title is-6"> 
-                      <input type="checkbox" value="onion" onChange={this.handleSelected}  /> 
-                      Onion
-                    </label>
-                    <br />
-                    <label className="title is-6">
-                      <input type="checkbox" value="pork" onChange={this.handleSelected} />
-                      Pork
-                    </label>
-                    <br />
-                    <label className="title is-6">
-                      <input type="checkbox" value="sugar" onChange={this.handleSelected} />
-                      Sugar
-                    </label>
-                    <br />
-                    <label className="title is-6"> 
-                      <input type="checkbox" value="eggs" onChange={this.handleSelected} /> 
-                      Eggs
-                    </label>
-                    <br />
-                    <label className="title is-6"> 
-                      <input type="checkbox" value="milk" onChange={this.handleSelected} /> 
-                      Milk 
-                    </label>
-                    <br />
-                    <label className="title is-6">
-                      <input type="checkbox" value="butter" onChange={this.handleSelected} />
-                      Butter
-                    </label>
-                    <br />
-                    <label className="title is-6"> 
-                      <input type="checkbox" value="flour" onChange={this.handleSelected} /> 
-                      Flour
-                    </label>
-                    <br />
-                    <label className="title is-6"> 
-                      <input type="checkbox" value='garlic' onChange={this.handleSelected} /> 
-                      Garlic 
-                    </label>
-                    <br />
-                    <label className="title is-6">
-                      <input type="checkbox" value='sugar' onChange={this.handleSelected} />
-                      Sugar
-                    </label>
-                    <br />
-                    <label className="title is-6">
-                      <input type="checkbox" value='ginger' onChange={this.handleSelected} />
-                      Ginger
-                    </label>
-                    <br />
-                    <label className="title is-6">
-                      <input type="checkbox" value='nut' onChange={this.handleSelected} />
-                      Nuts
-                    </label>
-                  </div>
-                </form> 
+                <Checkboxes
+                  onClick={this.handleSelected}
+                  onChange={this.handleChange}
+                
+                />
 
                 <hr />
               </div>
