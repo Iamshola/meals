@@ -3,6 +3,8 @@ import axios from 'axios'
 import Card from './Card'
 import _ from 'lodash'
 import { Link } from 'react-router-dom'
+import Loading from '../common/Error404'
+import Checkboxes from './indexPageTools/Checkboxes'
 
 class MealsIndex extends React.Component {
   constructor(){
@@ -14,7 +16,7 @@ class MealsIndex extends React.Component {
       ingredient: [],
       sortTerm: 'name|asc',
       allIngredient: [],
-      clickTerm: ''
+      clickTerm: []
       
     }
     this.handleKeyUp = this.handleKeyUp.bind(this)
@@ -45,8 +47,6 @@ class MealsIndex extends React.Component {
     
     }
   }
-
-
   handleAllIngredient(){
     var ingredients = this.state.eachMeal.map(function (elem) {
       return {
@@ -56,53 +56,59 @@ class MealsIndex extends React.Component {
         zall: [elem.strIngredient1, elem.strIngredient2, elem.strIngredient3, elem.strIngredient4, elem.strIngredient5, elem.strIngredient6, elem.strIngredient7, elem.strIngredient9, elem.strIngredient10, elem.strIngredient11, elem.strIngredient12, elem.strIngredient13, elem.strIngredient14].toLocaleString().toLowerCase().split(',')
       }
     })
-    
-
     this.setState({ allIngredient: ingredients })
   }
 
-
   handleKeyUp(e) {
-    this.setState({ searchTerm: e.target.value })
+    this.setState({ 
+      searchTerm: e.target.value 
+    })
   }
 
   handleChange(e) {
-    this.setState({ sortTerm: e.target.value })
+    this.setState({ 
+      sortTerm: e.target.value 
+    })
   }
-
   handleSelected(e) {
-    this.setState({ clickTerm: e.target.value })
+    if (this.state.clickTerm.includes(e.target.value)){
+      console.log('heyy')
+      this.setState({ 
+        clickTerm: this.state.clickTerm.filter(a => a !== e.target.value)
+      })
+    } else{
+      this.setState({
+        clickTerm: [...this.state.clickTerm, e.target.value]
+      })
+    }
 
   }
-
 
   filterMeals(){
     const re = new RegExp(this.state.searchTerm, 'i')
     const [field, order] = this.state.sortTerm.split('|')
+    const word = new RegExp(this.state.clickTerm, 'g')
    
-  
-
     const filterMeals = _.filter(this.state.allIngredient, meal => {
-      return re.test(meal.strMeal) && (meal.zall).includes(this.state.clickTerm)
+      return re.test(meal.strMeal) && word.test(meal.zall)
     })
 
     const sortedMeals = _.orderBy(filterMeals, [field], [order])
     return sortedMeals
   }
 
-  
-
   render(){
-    if (!this.state.meals || this.filterMeals().length === 0 ) return( 
-      <section className="hero is-success is-fullheight">
-        <div className="hero-body">
-          <div className="container">
-            <h2 className="title is-1 heading">No result found. Return <Link to="/">home </Link> </h2> 
-          </div>
-        </div>
-      </section>
 
+    console.log(this.state.allIngredient)
+    console.log(this.state.clickTerm)
+    if (!this.state.meals || this.filterMeals().length === 0 ) return( 
+      <Loading />
     )
+
+    if (this.filterMeals().length === 0) return (
+      <Loading />
+    )
+
     return(
       <section className="section">
         <div className="container">
@@ -127,25 +133,18 @@ class MealsIndex extends React.Component {
                     <option value="strMeal|desc">Z-A </option>
                   </select>
                   <br />
-                  <br />
-
+               
                 </div>
+
                 <hr />
                 <label> This Product Contains: </label>
-                <form onChange={this.handleChange}>
-                  <div className="checkbox">
-                    <label> <input type="checkbox" value="onion" onChange={this.handleSelected}  /> Onion </label>
-                    <label> <input type="checkbox" value="eggs" onChange={this.handleSelected} /> Eggs </label>
-                    <label> <input type="checkbox" value="milk" onChange={this.handleSelected} /> Milk </label>
-                    <label> <input type="checkbox" value="flour" onChange={this.handleSelected} /> lour </label>
-                  </div>
-                </form> 
-
+                <Checkboxes
+                  onClick={this.handleSelected}
+                  onChange={this.handleChange}
                 
-                <div className="field">
+                />
 
-                </div>
-
+                <hr />
               </div>
             </div>
 

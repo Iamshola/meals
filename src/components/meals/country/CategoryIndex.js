@@ -1,62 +1,54 @@
 import React from 'react'
 import axios from 'axios'
-import Card from '../Card'
-import _ from 'lodash'
 import { Link } from 'react-router-dom'
+import Card from '../Card'
 import Checkboxes from '../indexPageTools/Checkboxes.js'
+import _ from 'lodash'
 
 
-
-
-class CountriesIndex extends React.Component {
+class CategoryIndex extends React.Component {
   constructor() {
     super()
     this.state = {
-      countries: [],
-      countrySearchTerm: '',
-      sortTerm: 'name|asc',
-      selectedTerm: '',
-      ingredients: {}
-
+      category: [],
+      categorySortTerm: 'name|asc',
+      categorySearchTerm: ''
     }
     this.handleKeyUp = this.handleKeyUp.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.filterCountries = this.filterCountries.bind(this)
-
+    this.filterCategories = this.filterCategories.bind(this)
   }
 
   componentDidMount() {
-    axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?a=' + this.props.match.params.country)
-      .then(res => this.setState({ countries: res.data.meals }))
+    axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?c=' + this.props.match.params.id)
+      .then(res => this.setState({ category: res.data.meals }))
   }
 
-
-
   componentDidUpdate(prevProps) {
-    if (prevProps.match.params.country !== this.props.match.params.country) {
-      axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?a=' + this.props.match.params.country)
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?c=' + this.props.match.params.id)
         .then(res => {
-          this.setState({ countries: res.data.meals })
+          this.setState({ category: res.data.meals })
         })
     }
   }
 
-  
+
   handleKeyUp(e) {
-    this.setState({ countrySearchTerm: e.target.value })
+    this.setState({ categorySearchTerm: e.target.value })
   }
 
   handleChange(e) {
-    this.setState({ sortTerm: e.target.value })
+    this.setState({ categorySortTerm: e.target.value })
   }
 
 
-  filterCountries() {
-    const re = new RegExp(this.state.countrySearchTerm, 'i')
-    const [field, order] = this.state.sortTerm.split('|')
+  filterCategories() {
+    const re = new RegExp(this.state.categorySearchTerm, 'i')
+    const [field, order] = this.state.categorySortTerm.split('|')
 
 
-    const filterCountries = _.filter(this.state.countries, meal => {
+    const filterCountries = _.filter(this.state.category, meal => {
       return re.test(meal.strMeal)
     })
 
@@ -66,12 +58,10 @@ class CountriesIndex extends React.Component {
   }
 
 
+
   render() {
-    console.log(this.state.countries)
-    console.log(this.state.ingredients)
-
-    if (!this.state.countries) return <div className="container"><h2>No result found. Return <Link to="/">home </Link> </h2> </div>
-
+    console.log(this.state.category)
+    if (!this.state.category) return <h2>Loading...</h2>
     return (
       <section className="section">
         <div className="container">
@@ -82,7 +72,7 @@ class CountriesIndex extends React.Component {
             <div className="column is-2">
 
               <div className="field">
-                <h1 className="title is-6 heading">Your search currently matches {this.filterCountries().length} Countries</h1>
+                <h1 className="title is-6 heading">Your search currently matches {this.filterCategories().length} Countries</h1>
                 <hr />
                 <label className="label has-text-left title is-6 heading">Search your favourites</label>
 
@@ -113,15 +103,17 @@ class CountriesIndex extends React.Component {
 
             <div className="column">
               <div className="columns is-multiline">
-                {this.filterCountries().map(meal =>
+
+                {this.filterCategories().map(category =>
                   <div className="column is-half-tablet is-one-quarter-desktop"
-                    key={meal.idMeal}
+                    key={category.idMeal}
                   >
-                    <Link to={`/meals/${meal.idMeal}`}>
-                      <Card name={meal.strMeal} image={meal.strMealThumb} />
+                    <Link to={`/meals/${category.idMeal}`}>
+                      <Card name={category.strMeal} image={category.strMealThumb} />
                     </Link>
                   </div>
-                )}
+                )
+                }
 
               </div>
             </div>
@@ -134,5 +126,6 @@ class CountriesIndex extends React.Component {
 }
 
 
-export default CountriesIndex
- 
+
+export default CategoryIndex
+
