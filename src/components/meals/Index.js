@@ -15,7 +15,7 @@ class MealsIndex extends React.Component {
       ingredient: [],
       sortTerm: 'name|asc',
       allIngredient: [],
-      clickTerm: ''
+      clickTerm: []
       
     }
     this.handleKeyUp = this.handleKeyUp.bind(this)
@@ -46,8 +46,6 @@ class MealsIndex extends React.Component {
     
     }
   }
-
-
   handleAllIngredient(){
     var ingredients = this.state.eachMeal.map(function (elem) {
       return {
@@ -60,7 +58,6 @@ class MealsIndex extends React.Component {
     this.setState({ allIngredient: ingredients })
   }
 
-
   handleKeyUp(e) {
     this.setState({ 
       searchTerm: e.target.value 
@@ -72,20 +69,19 @@ class MealsIndex extends React.Component {
       sortTerm: e.target.value 
     })
   }
-
   handleSelected(e) {
-    if (this.state.clickTerm === e.target.value){
+    if (this.state.clickTerm.includes(e.target.value)){
+      console.log('heyy')
       this.setState({ 
-        clickTerm: ''
+        clickTerm: this.state.clickTerm.filter(a => a !== e.target.value)
       })
     } else{
       this.setState({
-        clickTerm: e.target.value
+        clickTerm: [...this.state.clickTerm, e.target.value]
       })
     }
 
   }
-
 
   filterMeals(){
     const re = new RegExp(this.state.searchTerm, 'i')
@@ -100,13 +96,12 @@ class MealsIndex extends React.Component {
     return sortedMeals
   }
 
-  
-
   render(){
-    console.log(this.state.clickTerm, 'hey')
+
+    console.log(this.state.allIngredient)
+    console.log(this.state.clickTerm)
     if (!this.state.meals || this.filterMeals().length === 0 ) return( 
       <Loading />
-
     )
   
 
@@ -146,14 +141,29 @@ class MealsIndex extends React.Component {
                       Onion
                     </label>
                     <br />
+                    <label className="title is-6">
+                      <input type="checkbox" value="pork" onChange={this.handleSelected} />
+                      Pork
+                    </label>
+                    <br />
+                    <label className="title is-6">
+                      <input type="checkbox" value="sugar" onChange={this.handleSelected} />
+                      Sugar
+                    </label>
+                    <br />
                     <label className="title is-6"> 
-                      <input type="checkbox" value="egg" onChange={this.handleSelected} /> 
+                      <input type="checkbox" value="eggs" onChange={this.handleSelected} /> 
                       Eggs
                     </label>
                     <br />
                     <label className="title is-6"> 
                       <input type="checkbox" value="milk" onChange={this.handleSelected} /> 
                       Milk 
+                    </label>
+                    <br />
+                    <label className="title is-6">
+                      <input type="checkbox" value="butter" onChange={this.handleSelected} />
+                      Butter
                     </label>
                     <br />
                     <label className="title is-6"> 
@@ -169,6 +179,11 @@ class MealsIndex extends React.Component {
                     <label className="title is-6">
                       <input type="checkbox" value='sugar' onChange={this.handleSelected} />
                       Sugar
+                    </label>
+                    <br />
+                    <label className="title is-6">
+                      <input type="checkbox" value='ginger' onChange={this.handleSelected} />
+                      Ginger
                     </label>
                     <br />
                     <label className="title is-6">
