@@ -1,10 +1,6 @@
 import React from 'react'
-<<<<<<< HEAD
-import { Link , withRouter } from 'react-router-dom'
-=======
 import {Link, withRouter } from 'react-router-dom'
 import axios from 'axios'
->>>>>>> master
 
 class Navbar extends React.Component {
   constructor(){
