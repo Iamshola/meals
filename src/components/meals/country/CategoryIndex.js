@@ -31,6 +31,7 @@ class CategoryIndex extends React.Component {
           this.setState({ category: res.data.meals })
         })
     }
+    window.scrollTo(0, 0)
   }
 
 
@@ -72,7 +73,7 @@ class CategoryIndex extends React.Component {
             <div className="column is-2">
 
               <div className="field">
-                <h1 className="title is-6 heading">Your search currently matches {this.filterCategories().length} Countries</h1>
+                <h1 className="title is-6 heading">Your search currently matches {this.filterCategories().length} Meals</h1>
                 <hr />
                 <label className="label has-text-left title is-6 heading">Search your favourites</label>
 

@@ -28,6 +28,7 @@ class CountriesIndex extends React.Component {
   componentDidMount() {
     axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?a=' + this.props.match.params.country)
       .then(res => this.setState({ countries: res.data.meals }))
+  
   }
 
 
@@ -38,8 +39,10 @@ class CountriesIndex extends React.Component {
         .then(res => {
           this.setState({ countries: res.data.meals })
         })
+      window.scrollTo(0, 0)
     }
   }
+
 
   
   handleKeyUp(e) {
@@ -82,7 +85,7 @@ class CountriesIndex extends React.Component {
             <div className="column is-2">
 
               <div className="field">
-                <h1 className="title is-6 heading">Your search currently matches {this.filterCountries().length} Countries</h1>
+                <h1 className="title is-6 heading">Your search currently matches {this.filterCountries().length} Meals </h1>
                 <hr />
                 <label className="label has-text-left title is-6 heading">Search your favourites</label>
 
