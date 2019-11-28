@@ -4,6 +4,7 @@ import Card from '../Card'
 import _ from 'lodash'
 import { Link } from 'react-router-dom'
 import Checkboxes from '../indexPageTools/Checkboxes.js'
+import NoResultsHolder from '../indexPageTools/NoResultHolder'
 
 
 
@@ -116,6 +117,10 @@ class CountriesIndex extends React.Component {
 
             <div className="column">
               <div className="columns is-multiline">
+                {!this.filterCountries()[0] &&
+                  <NoResultsHolder />
+                }
+
                 {this.filterCountries().map(meal =>
                   <div className="column is-half-tablet is-one-quarter-desktop"
                     key={meal.idMeal}

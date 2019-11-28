@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Card from '../Card'
 import Checkboxes from '../indexPageTools/Checkboxes.js'
+import NoResultsHolder from '../indexPageTools/NoResultHolder'
 import _ from 'lodash'
 
 
@@ -28,7 +29,11 @@ class CategoryIndex extends React.Component {
     if (prevProps.match.params.id !== this.props.match.params.id) {
       axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?c=' + this.props.match.params.id)
         .then(res => {
-          this.setState({ category: res.data.meals })
+          this.setState({ 
+            category: res.data.meals, 
+            categorySearchTerm: '', 
+            categorySortTerm: 'name|asc' 
+          })
         })
     }
     window.scrollTo(0, 0)
@@ -58,10 +63,7 @@ class CategoryIndex extends React.Component {
     return sortedcountries
   }
 
-
-
   render() {
-    console.log(this.state.category)
     if (!this.state.category) return <h2>Loading...</h2>
     return (
       <section className="section">
@@ -77,7 +79,10 @@ class CategoryIndex extends React.Component {
                 <hr />
                 <label className="label has-text-left title is-6 heading">Search your favourites</label>
 
-                <input className="input" type="text" placeholder="Favourite meal?" onKeyUp={this.handleKeyUp} />
+                <input className="input" type="text" placeholder="Favourite meal?" 
+                 
+                  onKeyUp={this.handleKeyUp}
+                />
 
                 <div className="field">
                   <hr />
@@ -95,15 +100,15 @@ class CategoryIndex extends React.Component {
                 <Checkboxes
                   onClick={this.handleSelected}
                   onChange={this.handleChange}
-
                 />
-
-
               </div>
             </div>
 
             <div className="column">
               <div className="columns is-multiline">
+                {!this.filterCategories()[0] &&
+                  <NoResultsHolder />
+                }
 
                 {this.filterCategories().map(category =>
                   <div className="column is-half-tablet is-one-quarter-desktop"

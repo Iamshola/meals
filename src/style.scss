@@ -1,6 +1,20 @@
 
 $warning: hsl(212, 89%, 82%);
 
+
+#notfound {
+  position: relative;
+  height: 60vh;
+  width: 60vh;
+  margin: 80px 270px;
+}
+
+
+
+
+div.card-content{
+  padding: 1rem 1rem ;
+}
 section.section{
   padding: 6rem 1.5rem;
 }
@@ -67,7 +81,8 @@ div.card{
 
 
 iframe#widget2{
-  height: 600px;
+  height: 300px;
+  width: 500px;
 }
  
 
@@ -102,7 +117,7 @@ footer.footer.bottom{
   width:480px !important;
   margin-left: auto;
   margin-right: auto;
-  border-radius: 20px;
+  border-radius: 160px;
 }
 
 

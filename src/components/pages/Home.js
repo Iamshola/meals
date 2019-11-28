@@ -1,6 +1,6 @@
 import React from 'react'
 import Card from '../meals/Card'
-// import Box from '../meals/Box'
+import Box from '../meals/indexPageTools/Box'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -96,7 +96,7 @@ class Home extends React.Component {
                 </div>
 
                 <div className="column is-half-desktop">
-                  <Card
+                  <Box
                     name={this.state.randomMeal.strMeal}
                     strYoutube={this.state.randomMeal.strYoutube}
                   />

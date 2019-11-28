@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Card = ({ name, image }) => {
+const Card = ({ name, image, area }) => {
   return (
 
     <div className="card">
@@ -15,7 +15,8 @@ const Card = ({ name, image }) => {
             
           </div>
           <div className="media-content">
-            <p className="title is-7 heading">{name}</p>
+            <p className="title is-7 heading has-text-centered">{name}</p>
+            <p className="title is-7 heading has-text-centered">Cuisine: {area}</p>
                
           </div>
         </div>

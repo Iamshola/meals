@@ -3,8 +3,11 @@ import axios from 'axios'
 import Card from './Card'
 import _ from 'lodash'
 import { Link } from 'react-router-dom'
+
+
 import Loading from '../common/Error404'
 import Checkboxes from './indexPageTools/Checkboxes'
+import NoResultsHolder from './indexPageTools/NoResultHolder'
 
 class MealsIndex extends React.Component {
   constructor(){
@@ -53,6 +56,7 @@ class MealsIndex extends React.Component {
         idMeal: elem.idMeal, 
         strMeal: elem.strMeal,
         strMealThumb: elem.strMealThumb,
+        strArea: elem.strArea,
         zall: [elem.strIngredient1, elem.strIngredient2, elem.strIngredient3, elem.strIngredient4, elem.strIngredient5, elem.strIngredient6, elem.strIngredient7, elem.strIngredient9, elem.strIngredient10, elem.strIngredient11, elem.strIngredient12, elem.strIngredient13, elem.strIngredient14].toLocaleString().toLowerCase().split(',')
       }
     })
@@ -98,14 +102,7 @@ class MealsIndex extends React.Component {
   }
 
   render(){
-
-    console.log(this.state.allIngredient)
-    console.log(this.state.clickTerm)
-    if (!this.state.meals || this.filterMeals().length === 0 ) return( 
-      <Loading />
-    )
-
-    if (this.filterMeals().length === 0) return (
+    if (!this.state.meals ) return( 
       <Loading />
     )
 
@@ -150,14 +147,30 @@ class MealsIndex extends React.Component {
 
             <div className="column">
               <div className="columns is-multiline">
+
+                {!this.filterMeals()[0] &&
+                  <NoResultsHolder />
+                }
+                
           
                 
                 {this.filterMeals().map(meal =>
                   <div className="column is-half-tablet is-one-quarter-desktop"
                     key={meal.idMeal}
                   >
-                    <Link to={`/meals/${meal.idMeal}`}>
-                      <Card name={meal.strMeal} image={meal.strMealThumb}/>
+                    <Link 
+                      to={{
+                        pathname: `/meals/${meal.idMeal}`,
+                        state: this.state.allIngredient
+                      }}
+                    
+                    >
+                      <Card 
+                        name={meal.strMeal} 
+                        image={meal.strMealThumb}
+                        area={meal.strArea}
+                        
+                      />
                     </Link>
                   </div>
                 )}
