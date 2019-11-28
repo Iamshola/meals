@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import ReactPlayer from 'react-player'
-// import CocktailCard from './cocktailMatch/cocktailCard'
+
 import { Link } from 'react-router-dom'
 
 
@@ -92,7 +92,7 @@ class ShowMeal extends React.Component {
             />
           </div>
           <br />
-          <CocktailCard />
+
         </section>
       
       </div>
