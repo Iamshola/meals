@@ -37,7 +37,6 @@ class CategoryIndex extends React.Component {
       )
   }
 
-
   componentDidUpdate(prevProps) {
     if (prevProps.match.params.id !== this.props.match.params.id) {
       axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?c=' + this.props.match.params.id)
@@ -122,6 +121,8 @@ class CategoryIndex extends React.Component {
 
     return sortedcountries
   }
+
+  
 
   render() {
     if (!this.state.category) return <h2>Loading...</h2>

@@ -48,7 +48,7 @@ class CountriesIndex extends React.Component {
           this.setState({ 
             countries: res.data.meals, 
             eachMeal: [], 
-            clickTerm: '' }, () => {
+            clickTerm: [] }, () => {
             this.eachIngredient()
           })
         }
@@ -98,8 +98,6 @@ class CountriesIndex extends React.Component {
 
   }
 
-
-  
   handleKeyUp(e) {
     this.setState({ countrySearchTerm: e.target.value })
   }
@@ -162,7 +160,7 @@ class CountriesIndex extends React.Component {
                 <Checkboxes
                   onClick={this.handleSelected}
                   onChange={this.handleChange}
-
+                  
                 />
 
 

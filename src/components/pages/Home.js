@@ -54,9 +54,7 @@ class Home extends React.Component {
           </div>
         </section>
 
-
-
-        <section className="hero is-medium is-primary is-warning">
+        <section className="hero is-medium is-light">
           <div className="hero-body">
             <div className="container">
               <h1 className="title has-text-centered">
@@ -81,8 +79,6 @@ class Home extends React.Component {
             </div>
           </div>
         </section>
-
-        
         <section className="hero is-medium">
           <div className="hero-body">
             <div className="container">
@@ -107,7 +103,7 @@ class Home extends React.Component {
           </div>
         </section>
 
-        <footer className="footer bottom">
+        <footer className="footer">
           <div className="content has-text-centered">
             <div>
           

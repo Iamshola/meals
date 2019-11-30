@@ -158,11 +158,7 @@ class MealsIndex extends React.Component {
                   <div className="column is-half-tablet is-one-quarter-desktop"
                     key={meal.idMeal}
                   >
-                    <Link 
-                      to={{
-                        pathname: `/meals/${meal.idMeal}`,
-                        state: this.state.allIngredient
-                      }}
+                    <Link to={`/meals/${meal.idMeal}`}
                     
                     >
                       <Card 

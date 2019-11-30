@@ -35,10 +35,11 @@ class ShowMeal extends React.Component {
         c.push(ingredients[i] + ', ' + portion[i])
       }
     }
-    const display = c.filter(item => item !== ',  ' && item !== ', ' && item !== 'null, ' )
+    let displayIngredients = c.filter(item => item !== ',  ' && item !== ', ' && item !== 'null, ' )
 
-    return display 
-    
+    displayIngredients = displayIngredients.map(word => word[0].toUpperCase() + word.slice(1).toLowerCase())
+
+    return displayIngredients
   }
 
   render(){

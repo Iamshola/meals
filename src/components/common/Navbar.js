@@ -32,10 +32,10 @@ class Navbar extends React.Component {
 
   render(){
     return(
-      <nav className="navbar is-warning is-fixed-top">
+      <nav className="navbar is-fixed-top">
         <div className="container">
           <div className="navbar-brand title is-6 heading">
-            <Link to= "/" className="navbar-item"> Home </Link>
+            <Link to= "/" className="navbar-item">MEAL4ALL </Link>
             <a role="button" className={`navbar-burger ${this.state.navbarOpen ? 'is-active' : ''} ` } onClick={this.toggleNavbar}>
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
