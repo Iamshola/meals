@@ -13,17 +13,30 @@ class CategoryIndex extends React.Component {
     this.state = {
       category: [],
       categorySortTerm: 'name|asc',
-      categorySearchTerm: ''
+      categorySearchTerm: '', 
+      meals: [],
+      clickTerm: []
+
     }
     this.handleKeyUp = this.handleKeyUp.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.filterCategories = this.filterCategories.bind(this)
+    this.handleSelected = this.handleSelected.bind(this)
+    this.eachIngredient = this.eachIngredient.bind(this)
+    this.handleAllIngredient = this.handleAllIngredient.bind(this)
+
+
   }
+
 
   componentDidMount() {
     axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?c=' + this.props.match.params.id)
-      .then(res => this.setState({ category: res.data.meals }))
+      .then(res => this.setState({ category: res.data.meals, eachMeal: [], clickTerm: '' }, () => {
+        this.eachIngredient()
+      })
+      )
   }
+
 
   componentDidUpdate(prevProps) {
     if (prevProps.match.params.id !== this.props.match.params.id) {
@@ -32,11 +45,57 @@ class CategoryIndex extends React.Component {
           this.setState({ 
             category: res.data.meals, 
             categorySearchTerm: '', 
-            categorySortTerm: 'name|asc' 
+            categorySortTerm: 'name|asc',
+            eachMeal: [],
+            clickTerm: ''
+          }, () => {
+            this.eachIngredient()
           })
-        })
+        }
+        )
+      window.scrollTo(0, 0)
     }
-    window.scrollTo(0, 0)
+  }
+
+  eachIngredient() {
+    if (this.state.category) {
+      const retrieveId = this.state.category.map(mealId => mealId.idMeal)
+      retrieveId.map(x =>
+        axios.get('https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + x)
+          .then(res => this.setState({ eachMeal: [...res.data.meals].concat(this.state.eachMeal) }, () => {
+            this.handleAllIngredient()
+          })
+          ))
+
+    }
+  }
+
+
+  handleAllIngredient() {
+    var ingredients = this.state.eachMeal.map(function (elem) {
+      return {
+        idMeal: elem.idMeal,
+        strMeal: elem.strMeal,
+        strMealThumb: elem.strMealThumb,
+        strArea: elem.strArea,
+        zall: [elem.strIngredient1, elem.strIngredient2, elem.strIngredient3, elem.strIngredient4, elem.strIngredient5, elem.strIngredient6, elem.strIngredient7, elem.strIngredient9, elem.strIngredient10, elem.strIngredient11, elem.strIngredient12, elem.strIngredient13, elem.strIngredient14].toLocaleString().toLowerCase().split(',')
+      }
+    })
+    this.setState({ allIngredient: ingredients })
+  }
+
+  handleSelected(e) {
+    if (this.state.clickTerm.includes(e.target.value)) {
+      console.log('heyy')
+      this.setState({
+        clickTerm: this.state.clickTerm.filter(a => a !== e.target.value)
+      })
+    } else {
+      this.setState({
+        clickTerm: [...this.state.clickTerm, e.target.value]
+      })
+    }
+
   }
 
 
@@ -52,10 +111,11 @@ class CategoryIndex extends React.Component {
   filterCategories() {
     const re = new RegExp(this.state.categorySearchTerm, 'i')
     const [field, order] = this.state.categorySortTerm.split('|')
+    const word = new RegExp(this.state.clickTerm, 'g')
 
 
-    const filterCountries = _.filter(this.state.category, meal => {
-      return re.test(meal.strMeal)
+    const filterCountries = _.filter(this.state.allIngredient, meal => {
+      return re.test(meal.strMeal) && word.test(meal.zall)
     })
 
     const sortedcountries = _.orderBy(filterCountries, [field], [order])
@@ -115,7 +175,11 @@ class CategoryIndex extends React.Component {
                     key={category.idMeal}
                   >
                     <Link to={`/meals/${category.idMeal}`}>
-                      <Card name={category.strMeal} image={category.strMealThumb} />
+                      <Card 
+                        name={category.strMeal} 
+                        image={category.strMealThumb} 
+                        area={category.strArea}
+                      />
                     </Link>
                   </div>
                 )

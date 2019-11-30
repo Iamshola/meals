@@ -102,7 +102,7 @@ class MealsIndex extends React.Component {
   }
 
   render(){
-    if (!this.state.meals ) return( 
+    if (!this.state.meals) return( 
       <Loading />
     )
 

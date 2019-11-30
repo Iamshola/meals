@@ -53,9 +53,6 @@ section.section{
   }
 }
 
-
-
-
 div.card{
   text-align:center;
   width: 350px;
@@ -65,7 +62,6 @@ div.card{
   -webkit-transition:  box-shadow .4s ease-out;
   box-shadow: .8px .9px 3px grey; 
 }
-
 
 .card:hover{ 
   box-shadow: 1px 8px 20px rgb(243, 213, 213);
@@ -81,8 +77,8 @@ div.card{
 
 
 iframe#widget2{
-  height: 300px;
-  width: 500px;
+  height: 400px;
+  width: 900px;
 }
  
 

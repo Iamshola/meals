@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 
 import { Link } from 'react-router-dom'
-import ReactPlayer from 'react-player'
+import Box from '../meals/indexPageTools/Box'
 
 class ShowMeal extends React.Component {
   constructor(){
@@ -34,25 +34,16 @@ class ShowMeal extends React.Component {
       for (var i = 0; i < ingredients.length; i++) {
         c.push(ingredients[i] + ', ' + portion[i])
       }
-      console.log(c)
     }
-
-    const display = c.filter(item => item !== ', ')
+    const display = c.filter(item => item !== ',  ' && item !== ', ' && item !== 'null, ' )
 
     return display 
     
   }
 
-
   render(){
-  
-    console.log(this.handleIngredients())
-
-    console.log('rendering', this.state.meal)
     if (!this.state.meal || !this.state.meal.strTags) return null
-
     return(
-      
       <section className="section">
         <div className="container">
 
@@ -85,19 +76,13 @@ class ShowMeal extends React.Component {
             <div className="columns">
               <div className="column">
                 <p className="title is-4 has-text-centered">Instructions:</p>
-                <p>{this.state.meal.strInstructions}</p>        
+                <p className="is-7 has-text-centered">{this.state.meal.strInstructions}</p>        
               </div>
               <div className="column">
-                <div className='player-wrapper'>
-                  <ReactPlayer
-                    url={this.state.meal.strYoutube}
-                    className='react-player'
-                    playing
-                    width='100%'
-                    height='100%'
-              
-                  />
-                </div>
+                <Box
+                  name={this.state.meal.strMeal}
+                  strYoutube={this.state.meal.strYoutube}
+                />
               </div>
             </div>
           </div>

@@ -17,31 +17,85 @@ class CountriesIndex extends React.Component {
       countrySearchTerm: '',
       sortTerm: 'name|asc',
       selectedTerm: '',
-      ingredients: {}
+      ingredients: {},
+      meals: [], 
+      clickTerm: []
 
     }
     this.handleKeyUp = this.handleKeyUp.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.filterCountries = this.filterCountries.bind(this)
+    this.handleSelected = this.handleSelected.bind(this)
+    this.eachIngredient = this.eachIngredient.bind(this)
+    this.handleAllIngredient = this.handleAllIngredient.bind(this)
 
   }
 
   componentDidMount() {
     axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?a=' + this.props.match.params.country)
-      .then(res => this.setState({ countries: res.data.meals }))
-  
+    
+      .then(res => this.setState({ countries: res.data.meals, eachMeal: [], clickTerm: '' }, () => {
+        this.eachIngredient()
+      })
+      )
   }
-
-
 
   componentDidUpdate(prevProps) {
     if (prevProps.match.params.country !== this.props.match.params.country) {
       axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?a=' + this.props.match.params.country)
+
         .then(res => {
-          this.setState({ countries: res.data.meals })
-        })
+          this.setState({ 
+            countries: res.data.meals, 
+            eachMeal: [], 
+            clickTerm: '' }, () => {
+            this.eachIngredient()
+          })
+        }
+        )
       window.scrollTo(0, 0)
     }
+  }
+
+  eachIngredient() {
+    if (this.state.countries) {
+      const retrieveId = this.state.countries.map(mealId => mealId.idMeal)
+      retrieveId.map(x =>
+        axios.get('https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + x)
+          .then(res => this.setState({ eachMeal: [...res.data.meals].concat(this.state.eachMeal) }, () => {
+            this.handleAllIngredient()
+          })
+          ))
+
+    }
+  }
+
+
+  handleAllIngredient() {
+    var ingredients = this.state.eachMeal.map(function (elem) {
+      return {
+        idMeal: elem.idMeal,
+        strMeal: elem.strMeal,
+        strMealThumb: elem.strMealThumb,
+        strArea: elem.strArea,
+        zall: [elem.strIngredient1, elem.strIngredient2, elem.strIngredient3, elem.strIngredient4, elem.strIngredient5, elem.strIngredient6, elem.strIngredient7, elem.strIngredient9, elem.strIngredient10, elem.strIngredient11, elem.strIngredient12, elem.strIngredient13, elem.strIngredient14].toLocaleString().toLowerCase().split(',')
+      }
+    })
+    this.setState({ allIngredient: ingredients })
+  }
+
+  handleSelected(e) {
+    if (this.state.clickTerm.includes(e.target.value)) {
+      console.log('heyy')
+      this.setState({
+        clickTerm: this.state.clickTerm.filter(a => a !== e.target.value)
+      })
+    } else {
+      this.setState({
+        clickTerm: [...this.state.clickTerm, e.target.value]
+      })
+    }
+
   }
 
 
@@ -58,10 +112,10 @@ class CountriesIndex extends React.Component {
   filterCountries() {
     const re = new RegExp(this.state.countrySearchTerm, 'i')
     const [field, order] = this.state.sortTerm.split('|')
+    const word = new RegExp(this.state.clickTerm, 'g')
 
-
-    const filterCountries = _.filter(this.state.countries, meal => {
-      return re.test(meal.strMeal)
+    const filterCountries = _.filter(this.state.allIngredient, meal => {
+      return re.test(meal.strMeal) && word.test(meal.zall)
     })
 
     const sortedcountries = _.orderBy(filterCountries, [field], [order])
@@ -71,8 +125,8 @@ class CountriesIndex extends React.Component {
 
 
   render() {
-    console.log(this.state.countries)
-    console.log(this.state.ingredients)
+    console.log(this.state.allIngredient)
+ 
 
     if (!this.state.countries) return <div className="container"><h2>No result found. Return <Link to="/">home </Link> </h2> </div>
 
@@ -126,7 +180,11 @@ class CountriesIndex extends React.Component {
                     key={meal.idMeal}
                   >
                     <Link to={`/meals/${meal.idMeal}`}>
-                      <Card name={meal.strMeal} image={meal.strMealThumb} />
+                      <Card 
+                        name={meal.strMeal} 
+                        image={meal.strMealThumb} 
+                        area={meal.strArea}
+                      />
                     </Link>
                   </div>
                 )}
