@@ -9,6 +9,7 @@ import Navbar from './components/common/Navbar'
 import './style.scss'
 import CategoryIndex from './components/meals/country/CategoryIndex'
 import CountriesIndex from './components/meals/country/CountriesIndex'
+import FavouriteMeals from './components/meals/country/Favourite'
 
 
 
@@ -23,6 +24,7 @@ class App extends React.Component {
         <HashRouter>
           <Navbar />
           <Switch>
+            <Route exact path="/favourites" component={FavouriteMeals} />
             <Route exact path="/countries/:country" component={CountriesIndex} />
             <Route exact path="/countries/:id" component={ShowMeal} />
             <Route path="/categories/:id" component={CategoryIndex} />

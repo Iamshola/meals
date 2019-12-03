@@ -8,21 +8,25 @@ class ShowMeal extends React.Component {
   constructor(){
     super()
     this.state = {
-      meal: []
+      meal: [], 
+      names: []
+      
     }
     this.handleIngredients = this.handleIngredients.bind(this)
+    this.addFavs = this.addFavs.bind(this)
+    this.removeFav = this.removeFav.bind(this)
   }
   
   componentDidMount(){
     axios.get('https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + this.props.match.params.id)
-      .then(res => this.setState({ meal: res.data.meals[0] 
+      .then(res => this.setState({ meal: res.data.meals[0]
 
       }, () => {
         this.handleIngredients()
+      
       })
       )
   }
-
 
   handleIngredients(){
     const ingredients = [this.state.meal.strIngredient1, this.state.meal.strIngredient2, this.state.meal.strIngredient3, this.state.meal.strIngredient4, this.state.meal.strIngredient5, this.state.meal.strIngredient6, this.state.meal.strIngredient7, this.state.meal.strIngredient9, this.state.meal.strIngredient10, this.state.meal.strIngredient11, this.state.meal.strIngredient12, this.state.meal.strIngredient13, this.state.meal.strIngredient14]
@@ -42,7 +46,41 @@ class ShowMeal extends React.Component {
     return displayIngredients
   }
 
+  addFavs(){
+    // localStorage.setItem('Meals', 'hey')
+    
+    var names = []
+    names = JSON.parse(localStorage.getItem('names')) || []
+    names.push(this.state.meal.idMeal)
+
+    names = localStorage.setItem('names', JSON.stringify(names))
+
+    // var storedNames = JSON.parse(localStorage.getItem("names"));
+
+    this.setState({ names })
+      
+  }
+
+
+  removeFav(){
+
+    var names = JSON.parse(localStorage.getItem('names'))
+
+    names = names.filter(item => item !== this.state.meal.idMeal)
+  
+    names = localStorage.setItem('names', JSON.stringify(names))
+
+    // var storedNames = JSON.parse(localStorage.getItem("names"));
+
+    this.setState({ names })
+
+  }
+
+
+
   render(){
+    console.log(this.state.names)
+
     if (!this.state.meal || !this.state.meal.strTags) return null
     return(
       <section className="section">
@@ -59,6 +97,14 @@ class ShowMeal extends React.Component {
               <div className="column">
                 <br />
                 <div className="title is-1 has-text-centered">{this.state.meal.strMeal}</div>
+                <div className="button" value={this.state.meal.idMeal} onClick={this.addFavs}>
+                  Save this for later!
+                </div>
+                <div className="button" onClick={this.removeFav}>
+                  Remove
+                </div>
+
+
                 <p className="title is-5 has-text-centered">{this.state.meal.strTags.split(',').join(', ')}</p>
                 <Link to={`/countries/${this.state.meal.strArea}`}>
                   <p className="title is-5 has-text-centered"> {this.state.meal.strArea} </p>

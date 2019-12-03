@@ -28,11 +28,12 @@ class MealsIndex extends React.Component {
     this.handleSelected = this.handleSelected.bind(this)
     this.eachIngredient = this.eachIngredient.bind(this)
     this.handleAllIngredient = this.handleAllIngredient.bind(this)
+    this.addFavs = this.addFavs.bind(this)
   }
 
   componentDidMount(){
     axios.get('https://www.themealdb.com/api/json/v1/1/filter.php?i=' + this.props.match.params.meal)
-      .then(res => this.setState({ meals: res.data.meals, eachMeal: [], clickTerm: '' }, () => {
+      .then(res => this.setState({ meals: res.data.meals, eachMeal: [], clickTerm: '', storedNames: '' }, () => {
         this.eachIngredient()
       })
       )
@@ -101,6 +102,24 @@ class MealsIndex extends React.Component {
     return sortedMeals
   }
 
+
+  addFavs() {
+    // localStorage.setItem('Meals', 'hey')
+
+    var names = []
+    names = [this.state.meal.idMeal, ...this.state.storedNames]
+
+    localStorage.setItem('names', JSON.stringify(names))
+
+    var storedNames = JSON.parse(localStorage.getItem('names'))
+
+    this.setState({ storedNames })
+
+  }
+
+
+
+
   render(){
     if (!this.state.meals) return( 
       <Loading />
@@ -167,6 +186,7 @@ class MealsIndex extends React.Component {
                         area={meal.strArea}
                         
                       />
+
                     </Link>
                   </div>
                 )}

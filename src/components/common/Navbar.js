@@ -36,6 +36,7 @@ class Navbar extends React.Component {
         <div className="container">
           <div className="navbar-brand title is-6 heading">
             <Link to= "/" className="navbar-item">MEAL4ALL </Link>
+            <Link to="/favourites" className="navbar-item">Favourite </Link>
             <a role="button" className={`navbar-burger ${this.state.navbarOpen ? 'is-active' : ''} ` } onClick={this.toggleNavbar}>
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
