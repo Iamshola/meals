@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import { Link } from 'react-router-dom'
 import Box from '../meals/indexPageTools/Box'
@@ -20,9 +22,11 @@ class ShowMeal extends React.Component {
   componentDidMount(){
     axios.get('https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + this.props.match.params.id)
       .then(res => this.setState({ meal: res.data.meals[0]
+       
 
       }, () => {
         this.handleIngredients()
+       
       
       })
       )
@@ -46,19 +50,17 @@ class ShowMeal extends React.Component {
     return displayIngredients
   }
 
-  addFavs(){
-    // localStorage.setItem('Meals', 'hey')
-    
+  addFavs(){    
     var names = []
     names = JSON.parse(localStorage.getItem('names')) || []
     names.push(this.state.meal.idMeal)
 
     names = localStorage.setItem('names', JSON.stringify(names))
-
-    // var storedNames = JSON.parse(localStorage.getItem("names"));
-
+   
+    toast.success('You favourited ' + this.state.meal.strMeal )
     this.setState({ names })
-      
+    
+
   }
 
 
@@ -72,19 +74,19 @@ class ShowMeal extends React.Component {
 
     // var storedNames = JSON.parse(localStorage.getItem("names"));
 
+    toast.info('You unfavourited ' + this.state.meal.strMeal)
     this.setState({ names })
-
   }
 
 
-
   render(){
-    console.log(this.state.names)
 
     if (!this.state.meal || !this.state.meal.strTags) return null
     return(
       <section className="section">
+         
         <div className="container">
+          
 
           <div className="container">
             <div className="columns">
@@ -93,6 +95,8 @@ class ShowMeal extends React.Component {
                   <img src={this.state.meal.strMealThumb} alt={this.state.meal.strMeal} />
                 </figure>
               </div>
+              <ToastContainer />
+             
 
               <div className="column">
                 <br />
@@ -130,6 +134,8 @@ class ShowMeal extends React.Component {
                   name={this.state.meal.strMeal}
                   strYoutube={this.state.meal.strYoutube}
                 />
+
+                
               </div>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import React from 'react'
 import Card from '../meals/Card'
 import Box from '../meals/indexPageTools/Box'
+import HomeImageHolder from '../meals/indexPageTools/HomeImageHolder'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -35,24 +36,25 @@ class Home extends React.Component {
   }
 
   render(){
+    console.log(this.state.randomMeal)
     if(!this.state.randomMeal) return <h2>Loading...</h2>
     return (
       <div>
-        <Navbar />
-        <section className="hero is-fullheight-with-navbar is-bold bg-hero">
+        <section className="hero is-medium is-bold bg-hero">
           <div className="hero-body">
             <div className="column has-text-centered">
-              <h1 className="title is-1 heading">MealBored</h1>
-              <h2 className="subtitle is-4"> A place for bored meal lovers</h2>
+              <h1 className="title is-4 heading">Ingredients</h1>
               <div className="field has add-ons">
                 <form onSubmit={this.handleSubmit}>
-                  <input type="text" placeholder="Search your favourite ingredient" className="input is-rounded" onChange={this.handleChange}/>
+                  <input type="text" placeholder="Search your favourite ingredient" className="input" onChange={this.handleChange}/>
                 </form>
               </div>
               <hr />
             </div>
           </div>
         </section>
+
+
 
         <section className="hero is-medium is-light">
           <div className="hero-body">
@@ -79,29 +81,13 @@ class Home extends React.Component {
             </div>
           </div>
         </section>
-        <section className="hero is-medium">
-          <div className="hero-body">
-            <div className="container">
-              <h1 className="title is-2 has-text-centered"> Try This!</h1>
-              <hr />
-              <div className="columns">
-                <div className="column has-text-centered home-random-text">
-                  <Link to={`/meals/${this.state.randomMeal.idMeal}`}>
-                    <p className="title is-2">{this.state.randomMeal.strMeal}</p>
-                  </Link>
-                </div>
-
-                <div className="column is-half-desktop">
-                  <Box
-                    name={this.state.randomMeal.strMeal}
-                    strYoutube={this.state.randomMeal.strYoutube}
-                  />
-                </div>
-               
-              </div>
-            </div>
-          </div>
-        </section>
+     
+        <HomeImageHolder
+          name={this.state.randomMeal.strMeal}
+          strMealThumb={this.state.randomMeal.strMealThumb}
+          strMeal={this.state.randomMeal.strMeal}
+          idMeal={this.state.randomMeal.idMeal}
+        />
 
         <footer className="footer">
           <div className="content has-text-centered">

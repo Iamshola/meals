@@ -36,14 +36,14 @@ class Navbar extends React.Component {
         <div className="container">
           <div className="navbar-brand title is-6 heading">
             <Link to= "/" className="navbar-item">MEAL4ALL </Link>
-            <Link to="/favourites" className="navbar-item">Favourite </Link>
+         
             <a role="button" className={`navbar-burger ${this.state.navbarOpen ? 'is-active' : ''} ` } onClick={this.toggleNavbar}>
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
             </a>
           </div>
-          <div className={`navbar-menu ${this.state.navbarOpen ? 'is-active' : ''} ` }>-
+          <div className={`navbar-menu ${this.state.navbarOpen ? 'is-active' : ''} ` }>
             <div className="navbar-end">
               <div className="navbar-item has-dropdown is-hoverable">
                 <a className="navbar-link">
@@ -51,7 +51,6 @@ class Navbar extends React.Component {
                 </a>
 
                 <div className="navbar-dropdown">
-
                   {this.state.categories.map(category =>
                     <div className="navbar-item"
                       key={category.idCategory}
@@ -83,7 +82,10 @@ class Navbar extends React.Component {
                   )}
                   <hr className="navbar-divider" />
                 </div>
-              </div>              
+              </div>  
+              <div className="navbar-item has-dropdown">
+                <Link to="/favourites" className="navbar-item">Your Favourite 💗💗 </Link>
+              </div>
             </div>
           </div>
         </div>

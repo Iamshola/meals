@@ -20,20 +20,20 @@ class App extends React.Component {
 
   render(){
     return(
-      <div>
-        <HashRouter>
-          <Navbar />
-          <Switch>
-            <Route exact path="/favourites" component={FavouriteMeals} />
-            <Route exact path="/countries/:country" component={CountriesIndex} />
-            <Route exact path="/countries/:id" component={ShowMeal} />
-            <Route path="/categories/:id" component={CategoryIndex} />
-            <Route path="/meals/:id" component={ShowMeal} />
-            <Route path="/search/:meal" component={MealsIndex} />
-            <Route exact path="/" component={Home} />
-          </Switch>
-        </HashRouter>
-      </div>
+
+      <HashRouter>
+        <Navbar />
+        <Switch>
+          <Route exact path="/favourites" component={FavouriteMeals} />
+          <Route exact path="/countries/:country" component={CountriesIndex} />
+          <Route exact path="/countries/:id" component={ShowMeal} />
+          <Route path="/categories/:id" component={CategoryIndex} />
+          <Route path="/meals/:id" component={ShowMeal} />
+          <Route path="/search/:meal" component={MealsIndex} />
+          <Route exact path="/" component={Home} />
+        </Switch>
+      </HashRouter>
+   
     )
   }
 

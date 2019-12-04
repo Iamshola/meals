@@ -156,8 +156,7 @@ class MealsIndex extends React.Component {
                 <label> This Product Contains: </label>
                 <Checkboxes
                   onClick={this.handleSelected}
-                  onChange={this.handleChange}
-                
+                  onChange={this.handleChange}      
                 />
 
                 <hr />

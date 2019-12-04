@@ -43,12 +43,16 @@ class FavouriteMeals extends React.Component {
 
   render() {
     console.log(this.state.allfavs)
+    if(!this.state.allfavs) return null
+
     if (this.state.allfavs.length === 0) return(
       <NoResultsHolder />
     )
     return (
       <section className="section">
         <div className="container">
+
+          <div className="title is-1 has-text-centered">All Your Favourite Saved </div>
           <hr />
         </div>
         <div className="column">
