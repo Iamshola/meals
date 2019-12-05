@@ -141,15 +141,15 @@ class MealsIndex extends React.Component {
 
                 <input className="input" type="text" placeholder="Favourite Meal"  onKeyUp={this.handleKeyUp}/>
 
-                <div className="field">
-                  <hr />
-                  <label> Alphabetical Order:  </label>
-                  <select onChange={this.handleChange}>
-                    <option value="strMeal|asc">A-Z </option>
-                    <option value="strMeal|desc">Z-A </option>
-                  </select>
-                  <br />
-               
+                <hr />
+                <label> Alphabetical Order:  </label>
+                <div className="control">
+                  <div className="select is-large">
+                    <select onChange={this.handleChange}>
+                      <option value="strMeal|asc">A-Z </option>
+                      <option value="strMeal|desc">Z-A </option>
+                    </select>
+                  </div>
                 </div>
 
                 <hr />

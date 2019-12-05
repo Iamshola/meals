@@ -26,7 +26,6 @@ class FavouriteMeals extends React.Component {
       
   }
 
-
   getInfoFromStorage(){
     if(this.state.names){
       const retrieveFav = this.state.names.map(meal => meal)
@@ -35,8 +34,6 @@ class FavouriteMeals extends React.Component {
         axios.get('https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + x)
           .then(res => this.setState({ allfavs: [...res.data.meals].concat(this.state.allfavs) })
           ))
-
-
     }
   }
   

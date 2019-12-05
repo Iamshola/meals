@@ -11,7 +11,9 @@ class ShowMeal extends React.Component {
     super()
     this.state = {
       meal: [], 
-      names: []
+      names: [], 
+      active: true, 
+      unactive: false
       
     }
     this.handleIngredients = this.handleIngredients.bind(this)
@@ -58,9 +60,8 @@ class ShowMeal extends React.Component {
     names = localStorage.setItem('names', JSON.stringify(names))
    
     toast.success('You favourited ' + this.state.meal.strMeal )
-    this.setState({ names })
-    
-
+    this.setState({ names, active: !this.state.active, unactive: !this.state.unactive })
+  
   }
 
 
@@ -75,7 +76,7 @@ class ShowMeal extends React.Component {
     // var storedNames = JSON.parse(localStorage.getItem("names"));
 
     toast.info('You unfavourited ' + this.state.meal.strMeal)
-    this.setState({ names })
+    this.setState({ names, unactive: !this.state.unactive, active: !this.state.active  })
   }
 
 
@@ -97,17 +98,15 @@ class ShowMeal extends React.Component {
               </div>
               <ToastContainer />
              
-
               <div className="column">
                 <br />
                 <div className="title is-1 has-text-centered">{this.state.meal.strMeal}</div>
-                <div className="button" value={this.state.meal.idMeal} onClick={this.addFavs}>
-                  Save this for later!
-                </div>
-                <div className="button" onClick={this.removeFav}>
-                  Remove
-                </div>
-
+                <div className="has-text-centered">
+                  {this.state.active && <button className="button is-primary" value={this.state.meal.idMeal} onClick={this.addFavs}> Save this for later!</button> }
+                  {this.state.unactive && <button className="button is-warning" onClick={this.removeFav}>Remove </button>}
+  
+                </div> 
+                <br />
 
                 <p className="title is-5 has-text-centered">{this.state.meal.strTags.split(',').join(', ')}</p>
                 <Link to={`/countries/${this.state.meal.strArea}`}>
