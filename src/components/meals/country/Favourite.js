@@ -46,36 +46,70 @@ class FavouriteMeals extends React.Component {
       <NoResultsHolder />
     )
     return (
-      <section className="section">
+      <section className = "section" >
         <div className="container">
-
-          <div className="title is-1 has-text-centered">All Your Favourite Saved </div>
           <hr />
         </div>
-        <div className="column">
-          <div className="columns is-multiline">
-            {this.state.allfavs.map(meal =>
-              <div className="column is-half-tablet is-one-quarter-desktop"
-                key={meal.idMeal}
-              >
-                <Link to={`/meals/${meal.idMeal}`}
+        <div className="container">
+          <div className="columns">
+            <div className="column is-2">
 
-                >
-                  <Card
-                    name={meal.strMeal}
-                    image={meal.strMealThumb}
-                    area={meal.strArea}
+              <div className="field">
+                <h1 className="title is-6 heading">Your search currently matches {this.state.allfavs.length} Meals</h1>
+                <hr />
+                <label className="label has-text-left title is-6 heading">Search your favourites</label>
 
-                  />
+                <input className="input" type="text" placeholder="Favourite Meal" onKeyUp={this.handleKeyUp} />
 
-                </Link>
+                <hr />
+                <label> Alphabetical Order:  </label>
+                <div className="control">
+                  <div className="select is-large">
+                    <select onChange={this.handleChange}>
+                      <option value="strMeal|asc">A-Z </option>
+                      <option value="strMeal|desc">Z-A </option>
+                    </select>
+                  </div>
+                </div>
+
+                <hr />
+             
+                <hr />
               </div>
-            )}
+            </div>
+
+            <div className="column">
+              <div className="columns is-multiline">
+
+                {!this.state.allfavs[0] &&
+                  <NoResultsHolder />
+                }
+
+
+
+                {this.state.allfavs.map(meal =>
+                  <div className="column is-half-tablet is-one-quarter-desktop"
+                    key={meal.idMeal}
+                  >
+                    <Link to={`/meals/${meal.idMeal}`}
+
+                    >
+                      <Card
+                        name={meal.strMeal}
+                        image={meal.strMealThumb}
+                        area={meal.strArea}
+
+                      />
+
+                    </Link>
+                  </div>
+                )}
+
+              </div>
+            </div>
           </div>
         </div>
-        
-
-      </section>
+      </section >
     )
   }
 }
