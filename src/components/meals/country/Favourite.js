@@ -55,26 +55,7 @@ class FavouriteMeals extends React.Component {
             <div className="column is-2">
 
               <div className="field">
-                <h1 className="title is-6 heading">Your search currently matches {this.state.allfavs.length} Meals</h1>
-                <hr />
-                <label className="label has-text-left title is-6 heading">Search your favourites</label>
-
-                <input className="input" type="text" placeholder="Favourite Meal" onKeyUp={this.handleKeyUp} />
-
-                <hr />
-                <label> Alphabetical Order:  </label>
-                <div className="control">
-                  <div className="select is-large">
-                    <select onChange={this.handleChange}>
-                      <option value="strMeal|asc">A-Z </option>
-                      <option value="strMeal|desc">Z-A </option>
-                    </select>
-                  </div>
-                </div>
-
-                <hr />
-             
-                <hr />
+                <h1 className="title is-6 heading">Your currently have {this.state.allfavs.length} Favourites</h1>
               </div>
             </div>
 

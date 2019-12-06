@@ -28,7 +28,6 @@ class MealsIndex extends React.Component {
     this.handleSelected = this.handleSelected.bind(this)
     this.eachIngredient = this.eachIngredient.bind(this)
     this.handleAllIngredient = this.handleAllIngredient.bind(this)
-    this.addFavs = this.addFavs.bind(this)
   }
 
   componentDidMount(){
@@ -58,7 +57,7 @@ class MealsIndex extends React.Component {
         strMeal: elem.strMeal,
         strMealThumb: elem.strMealThumb,
         strArea: elem.strArea,
-        zall: [elem.strIngredient1, elem.strIngredient2, elem.strIngredient3, elem.strIngredient4, elem.strIngredient5, elem.strIngredient6, elem.strIngredient7, elem.strIngredient9, elem.strIngredient10, elem.strIngredient11, elem.strIngredient12, elem.strIngredient13, elem.strIngredient14].toLocaleString().toLowerCase().split(',')
+        zall: [elem.strIngredient1, elem.strIngredient2, elem.strIngredient3, elem.strIngredient4, elem.strIngredient5, elem.strIngredient6, elem.strIngredient7, elem.strIngredient8, elem.strIngredient9, elem.strIngredient10, elem.strIngredient11, elem.strIngredient12, elem.strIngredient13, elem.strIngredient14, elem.strIngredient15, elem.strIngredient16, elem.strIngredient17, elem.strIngredient18, elem.strIngredient19, elem.strIngredient20].toLocaleString().toLowerCase().split(',')
       }
     })
     this.setState({ allIngredient: ingredients })
@@ -77,7 +76,6 @@ class MealsIndex extends React.Component {
   }
   handleSelected(e) {
     if (this.state.clickTerm.includes(e.target.value)){
-      console.log('heyy')
       this.setState({ 
         clickTerm: this.state.clickTerm.filter(a => a !== e.target.value)
       })
@@ -92,7 +90,7 @@ class MealsIndex extends React.Component {
   filterMeals(){
     const re = new RegExp(this.state.searchTerm, 'i')
     const [field, order] = this.state.sortTerm.split('|')
-    const word = new RegExp(this.state.clickTerm, 'g')
+    const word = new RegExp(this.state.clickTerm, 'i')
    
     const filterMeals = _.filter(this.state.allIngredient, meal => {
       return re.test(meal.strMeal) && word.test(meal.zall)
@@ -102,30 +100,13 @@ class MealsIndex extends React.Component {
     return sortedMeals
   }
 
-
-  addFavs() {
-    // localStorage.setItem('Meals', 'hey')
-
-    var names = []
-    names = [this.state.meal.idMeal, ...this.state.storedNames]
-
-    localStorage.setItem('names', JSON.stringify(names))
-
-    var storedNames = JSON.parse(localStorage.getItem('names'))
-
-    this.setState({ storedNames })
-
-  }
-
-
-
-
   render(){
     if (!this.state.meals) return( 
       <Loading />
     )
 
     return(
+      
       <section className="section">
         <div className="container">
           <hr />
@@ -144,7 +125,7 @@ class MealsIndex extends React.Component {
                 <hr />
                 <label> Alphabetical Order:  </label>
                 <div className="control">
-                  <div className="select is-large">
+                  <div className="select">
                     <select onChange={this.handleChange}>
                       <option value="strMeal|asc">A-Z </option>
                       <option value="strMeal|desc">Z-A </option>
