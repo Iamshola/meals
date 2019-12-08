@@ -28,7 +28,6 @@ const Checkboxes = ({ onChange, onClick }) => {
         <br />
         <br />
         
-
         <h1 className="title is-7 heading">Dairy Products</h1>
         <label className="title is-6">
           <input type="checkbox" value="milk" onClick={onClick} />

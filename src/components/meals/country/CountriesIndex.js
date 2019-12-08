@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 import Checkboxes from '../indexPageTools/Checkboxes.js'
 import NoResultsHolder from '../indexPageTools/NoResultHolder'
 
+import StickyBox from 'react-sticky-box/dist/esnext'
+
 
 
 
@@ -110,7 +112,7 @@ class CountriesIndex extends React.Component {
   filterCountries() {
     const re = new RegExp(this.state.countrySearchTerm, 'i')
     const [field, order] = this.state.sortTerm.split('|')
-    const word = new RegExp(this.state.clickTerm, 'g')
+    const word = new RegExp(this.state.clickTerm, 'i')
 
     const filterCountries = _.filter(this.state.allIngredient, meal => {
       return re.test(meal.strMeal) && word.test(meal.zall)
@@ -123,9 +125,6 @@ class CountriesIndex extends React.Component {
 
 
   render() {
-    console.log(this.state.allIngredient)
- 
-
     if (!this.state.countries) return <div className="container"><h2>No result found. Return <Link to="/">home </Link> </h2> </div>
 
     return (
@@ -136,35 +135,39 @@ class CountriesIndex extends React.Component {
         <div className="container">
           <div className="columns">
             <div className="column is-2">
-
-              <div className="field">
-                <h1 className="title is-6 heading">Your search currently matches {this.filterCountries().length} Meals </h1>
-                <hr />
-                <label className="label has-text-left title is-6 heading">Search your favourites</label>
-
-                <input className="input" type="text" placeholder="Favourite meal?" onKeyUp={this.handleKeyUp} />
+              <StickyBox offsetTop={20} offsetBottom={20}>
 
                 <div className="field">
+                  <h1 className="title is-6 heading">Your search currently matches {this.filterCountries().length} Meals </h1>
                   <hr />
-                  <label> Alphabetical Order:  </label>
-                  <select onChange={this.handleChange}>
-                    <option value="strMeal|asc">A-Z </option>
-                    <option value="strMeal|desc">Z-A </option>
-                  </select>
-                  <br />
-                  <br />
+                  <label className="label has-text-left title is-6 heading">Search your favourites</label>
+
+                  <input className="input" type="text" placeholder="Favourite meal?" onKeyUp={this.handleKeyUp} />
+
+                  <div className="field">
+                    <hr />
+                    <label> Alphabetical Order:  </label>
+                    <div className="control">
+                      <div className="select">
+
+                        <select onChange={this.handleChange}>
+                          <option value="strMeal|asc">A-Z </option>
+                          <option value="strMeal|desc">Z-A </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <label> This Product Contains: </label>
+                  <Checkboxes
+                    onClick={this.handleSelected}
+                    onChange={this.handleChange}
+                  
+                  />
+
 
                 </div>
-                <hr />
-                <label> This Product Contains: </label>
-                <Checkboxes
-                  onClick={this.handleSelected}
-                  onChange={this.handleChange}
-                  
-                />
-
-
-              </div>
+              </StickyBox>
             </div>
 
             <div className="column">

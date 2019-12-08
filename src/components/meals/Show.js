@@ -28,7 +28,7 @@ class ShowMeal extends React.Component {
 
       }, () => {
         this.handleIngredients()
-       
+        this.highlightChecker()
       
       })
       )
@@ -46,7 +46,7 @@ class ShowMeal extends React.Component {
         c.push(ingredients[i] + ', ' + portion[i])
       }
     }
-    let displayIngredients = c.filter(item => item !== ',  ' && item !== ', ' && item !== 'null, ' )
+    let displayIngredients = c.filter(item => item !== ',  ' && item !== ', ' && item !== ', null')
 
     displayIngredients = displayIngredients.map(word => word[0].toUpperCase() + word.slice(1).toLowerCase())
 
@@ -62,7 +62,6 @@ class ShowMeal extends React.Component {
    
     toast.success('You favourited ' + this.state.meal.strMeal )
     this.setState({ names, active: !this.state.active, unactive: !this.state.unactive })
-  
   }
 
 
@@ -70,18 +69,30 @@ class ShowMeal extends React.Component {
 
     var names = JSON.parse(localStorage.getItem('names'))
 
-    names = names.filter(item => item !== this.state.meal.idMeal)
-  
-    names = localStorage.setItem('names', JSON.stringify(names))
+    console.log(names)
 
-    // var storedNames = JSON.parse(localStorage.getItem("names"));
+    names = names.filter(item => item !== this.state.meal.idMeal)
+
+    names = localStorage.setItem('names', JSON.stringify(names))
 
     toast.info('You unfavourited ' + this.state.meal.strMeal)
     this.setState({ names, unactive: !this.state.unactive, active: !this.state.active  })
   }
 
+  highlightChecker(){
+    var names = JSON.parse(localStorage.getItem('names'))
+    console.log(names)
+
+    if(names.includes(this.state.meal.idMeal)){
+      this.setState({ names, unactive: !this.state.unactive, active: !this.state.active })
+    }
+
+  }
+
 
   render(){
+
+    console.log(this.state.meal)
 
     if (!this.state.meal || !this.state.meal.strTags) return null
     return(
