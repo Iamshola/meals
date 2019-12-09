@@ -28,7 +28,7 @@ class ShowMeal extends React.Component {
 
       }, () => {
         this.handleIngredients()
-        this.detectmob()
+        this.highlightChecker()
       
       })
       )
@@ -88,18 +88,15 @@ class ShowMeal extends React.Component {
 
   }
 
-  detectmob() {
-    if (window.innerWidth <= 800 && window.innerHeight <= 600) {
-      return true
-    } else {
-      this.highlightChecker()
-    }
-  }
+  // detectmob() {
+  //   if (window.innerWidth <= 800 && window.innerHeight <= 600) {
+  //     return true
+  //   } else {
+  //     this.highlightChecker()
+  //   }
+  // }
 
   render(){
-    console.log(this.detectmob())
-  
-
     console.log(this.state.meal)
 
     if (!this.state.meal || !this.state.meal.strTags) return null
