@@ -28,7 +28,7 @@ class ShowMeal extends React.Component {
 
       }, () => {
         this.handleIngredients()
-        this.highlightChecker()
+        this.detectmob()
       
       })
       )
@@ -81,7 +81,6 @@ class ShowMeal extends React.Component {
 
   highlightChecker(){
     var names = JSON.parse(localStorage.getItem('names'))
-    console.log(names)
 
     if(names.includes(this.state.meal.idMeal)){
       this.setState({ names, unactive: !this.state.unactive, active: !this.state.active })
@@ -89,8 +88,17 @@ class ShowMeal extends React.Component {
 
   }
 
+  detectmob() {
+    if (window.innerWidth <= 800 && window.innerHeight <= 600) {
+      return true
+    } else {
+      this.highlightChecker()
+    }
+  }
 
   render(){
+    console.log(this.detectmob())
+  
 
     console.log(this.state.meal)
 

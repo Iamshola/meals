@@ -157,7 +157,9 @@ class CategoryIndex extends React.Component {
                           <option value="strMeal|desc">Z-A </option>
                         </select>
                       </div>
-                    </div>           
+                    </div>
+
+           
 
                   </div>
                   <hr />
