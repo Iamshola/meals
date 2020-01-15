@@ -21,7 +21,8 @@ class CountriesIndex extends React.Component {
       selectedTerm: '',
       ingredients: {},
       meals: [], 
-      clickTerm: []
+      clickTerm: [], 
+      checked: false
 
     }
     this.handleKeyUp = this.handleKeyUp.bind(this)
@@ -71,8 +72,6 @@ class CountriesIndex extends React.Component {
 
     }
   }
-
-
   handleAllIngredient() {
     var ingredients = this.state.eachMeal.map(function (elem) {
       return {
@@ -85,10 +84,8 @@ class CountriesIndex extends React.Component {
     })
     this.setState({ allIngredient: ingredients })
   }
-
   handleSelected(e) {
     if (this.state.clickTerm.includes(e.target.value)) {
-      console.log('heyy')
       this.setState({
         clickTerm: this.state.clickTerm.filter(a => a !== e.target.value)
       })
@@ -99,7 +96,6 @@ class CountriesIndex extends React.Component {
     }
 
   }
-
   handleKeyUp(e) {
     this.setState({ countrySearchTerm: e.target.value })
   }
@@ -125,6 +121,7 @@ class CountriesIndex extends React.Component {
 
 
   render() {
+    console.log(this.state.checked)
     if (!this.state.countries) return <div className="container"><h2>No result found. Return <Link to="/">home </Link> </h2> </div>
 
     return (
@@ -162,7 +159,6 @@ class CountriesIndex extends React.Component {
                   <Checkboxes
                     onClick={this.handleSelected}
                     onChange={this.handleChange}
-                  
                   />
 
 

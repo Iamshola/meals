@@ -24,12 +24,9 @@ class ShowMeal extends React.Component {
   componentDidMount(){
     axios.get('https://www.themealdb.com/api/json/v1/1/lookup.php?i=' + this.props.match.params.id)
       .then(res => this.setState({ meal: res.data.meals[0]
-       
-
       }, () => {
         this.handleIngredients()
         this.highlightChecker()
-      
       })
       )
   }
@@ -57,35 +54,25 @@ class ShowMeal extends React.Component {
     var names = []
     names = JSON.parse(localStorage.getItem('names')) || []
     names.push(this.state.meal.idMeal)
-
     names = localStorage.setItem('names', JSON.stringify(names))
-   
     toast.success('You favourited ' + this.state.meal.strMeal )
     this.setState({ names, active: !this.state.active, unactive: !this.state.unactive })
   }
 
 
   removeFav(){
-
     var names = JSON.parse(localStorage.getItem('names'))
-
-    console.log(names)
-
     names = names.filter(item => item !== this.state.meal.idMeal)
-
     names = localStorage.setItem('names', JSON.stringify(names))
-
     toast.info('You unfavourited ' + this.state.meal.strMeal)
     this.setState({ names, unactive: !this.state.unactive, active: !this.state.active  })
   }
 
   highlightChecker(){
     var names = JSON.parse(localStorage.getItem('names'))
-
     if(names.includes(this.state.meal.idMeal)){
       this.setState({ names, unactive: !this.state.unactive, active: !this.state.active })
     }
-
   }
 
   // detectmob() {
@@ -98,25 +85,35 @@ class ShowMeal extends React.Component {
 
   render(){
     console.log(this.state.meal)
-
     if (!this.state.meal || !this.state.meal.strTags) return null
     return(
       <section className="section">
          
         <div className="container">
+
+          {/* <section> */}
+          {/* <div className="hero-body"> */}
+          {/* <div className="container"> */}
+          <figure className="image is-16by9">
+            <img src={this.state.meal.strMealThumb} alt={this.state.meal.strMeal} />
+          </figure>
+              
+          {/* </div> */}
+          {/* </div> */}
+          {/* </section> */}
           
 
           <div className="container">
+            <ToastContainer />
             <div className="columns">
-              <div className="column">
-                <figure className="image show-page">
+              {/* <div className="column">
+                {/* <figure className="image show-page">
                   <img src={this.state.meal.strMealThumb} alt={this.state.meal.strMeal} />
-                </figure>
-              </div>
-              <ToastContainer />
+                </figure> */}
+              {/* </div> */}
+              
              
               <div className="column">
-                <br />
                 <div className="title is-1 has-text-centered">{this.state.meal.strMeal}</div>
                 <div className="has-text-centered">
                   {this.state.active && <button className="button is-primary" value={this.state.meal.idMeal} onClick={this.addFavs}> Save this for later!</button> }
@@ -140,19 +137,15 @@ class ShowMeal extends React.Component {
             </div>
 
             <hr />
-            <div className="columns">
-              <div className="column">
-                <p className="title is-4 has-text-centered">Instructions:</p>
-                <p className="is-7 has-text-centered">{this.state.meal.strInstructions}</p>        
-              </div>
-              <div className="column">
-                <Box
-                  name={this.state.meal.strMeal}
-                  strYoutube={this.state.meal.strYoutube}
-                />
+            <div className="column">
 
-                
-              </div>
+              <p className="title is-4 has-text-centered">Instructions:</p>
+              <p className="is-7 has-text-centered">{this.state.meal.strInstructions}</p>
+              <br />
+              <Box
+                name={this.state.meal.strMeal}
+                strYoutube={this.state.meal.strYoutube}
+              />
             </div>
           </div>
         </div>

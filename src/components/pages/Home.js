@@ -4,9 +4,10 @@ import Box from '../meals/indexPageTools/Box'
 import HomeImageHolder from '../meals/indexPageTools/HomeImageHolder'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import LazyHero from 'react-lazy-hero'
 
 
-import Navbar from  '../common/Navbar'
+// import Navbar from  '../common/Navbar'
 
 class Home extends React.Component {
   constructor(){
@@ -40,48 +41,26 @@ class Home extends React.Component {
     if(!this.state.randomMeal) return <h2>Loading...</h2>
     return (
       <div>
-        <section className="hero is-medium is-bold bg-hero">
+        <div className="container">
+          <LazyHero ransitionTimingFunction="ease-in-out" isFixed={true} minHeight="69vh" opacity={0.2} imageSrc="https://media.giphy.com/media/3Oo9kuFdl4qjK/giphy.gif">
+          </LazyHero>
+        </div>
+      
+        <section className="hero is-bold bg-hero">
           <div className="hero-body">
             <div className="column has-text-centered">
-              <h1 className="title is-4 heading">Ingredients</h1>
+              <h1 className="title is-4 heading">SEARCH BY YOUR FAVOURITE Ingredients</h1>
               <div className="field has add-ons">
-                <form onSubmit={this.handleSubmit}>
-                  <input type="text" placeholder="Search your favourite ingredient" className="input" onChange={this.handleChange}/>
+                <form onSubmit={this.handleSubmit} className="search-container">
+                  <input type="text" id="search-bar" placeholder="Search your favourite ingredient" className="input is-half is-8" onChange={this.handleChange}/>
+
+                  <img className="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png" />
                 </form>
               </div>
-              <hr />
             </div>
           </div>
-        </section>
-
-
-
-        <section className="hero is-medium is-light">
-          <div className="hero-body">
-            <div className="container">
-              <h1 className="title has-text-centered">
-                About Us
-              </h1>
-              <h2 className="subtitle">
-                We are a social enterprise providing meal ideas.
-                Assumenda ratione quos, nihil laboriosam illum laudantium molestias id.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                Reprehenderit blanditiis obcaecati ducimus consequatur porro! 
-                Eum deserunt, repellat voluptatum dolor possimus odit! 
-                Assumenda ratione quos, nihil laboriosam illum laudantium molestias id.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                Reprehenderit blanditiis obcaecati ducimus consequatur porro! 
-                Eum deserunt, repellat voluptatum dolor possimus odit! 
-                Assumenda ratione quos, nihil laboriosam illum laudantium molestias id.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                Reprehenderit blanditiis obcaecati ducimus consequatur porro! 
-                Eum deserunt, repellat voluptatum dolor possimus odit! 
-                Assumenda ratione quos, nihil laboriosam illum laudantium molestias id.
-              </h2>
-            </div>
-          </div>
-        </section>
-     
+          <hr />
+        </section>     
         <HomeImageHolder
           name={this.state.randomMeal.strMeal}
           strMealThumb={this.state.randomMeal.strMealThumb}
