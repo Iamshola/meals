@@ -33,7 +33,7 @@ class ShowMeal extends React.Component {
 
   detectmob() {
     if (window.innerWidth <= 800 && window.innerHeight <= 600) {
-      return true
+      return false
     } else {
       this.highlightChecker()
     }

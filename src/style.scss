@@ -156,6 +156,10 @@ footer.footer.bottom{
   background-color: #a481fb2d;
 }
 
+div.hero-body{
+  padding-bottom: 0;
+}
+
 
 
 // div.column.has-text-centered.home-random-text{
@@ -170,6 +174,12 @@ footer.footer.bottom{
   border-radius: 160px;
 }
 
+
+.image.homeImage img{
+  height: 300px !important;
+  width: 600px !important;
+
+}
 
 @import '~bulma'
  

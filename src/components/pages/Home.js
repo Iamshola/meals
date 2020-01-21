@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import LazyHero from 'react-lazy-hero'
 
 
+
 // import Navbar from  '../common/Navbar'
 
 class Home extends React.Component {
@@ -58,15 +59,18 @@ class Home extends React.Component {
                 </form>
               </div>
             </div>
+
           </div>
-          <hr />
-        </section>     
-        <HomeImageHolder
-          name={this.state.randomMeal.strMeal}
-          strMealThumb={this.state.randomMeal.strMealThumb}
-          strMeal={this.state.randomMeal.strMeal}
-          idMeal={this.state.randomMeal.idMeal}
-        />
+          <HomeImageHolder
+            name={this.state.randomMeal.strMeal}
+            strMealThumb={this.state.randomMeal.strMealThumb}
+            strMeal={this.state.randomMeal.strMeal}
+            idMeal={this.state.randomMeal.idMeal}
+          />
+         
+        </section>   
+       
+       
 
         <footer className="footer">
           <div className="content has-text-centered">
