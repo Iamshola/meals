@@ -12,30 +12,23 @@ class Loading extends React.Component {
 
   render() {
     return (
-      <div className='loading-container'>
-        <div className="loading-child"></div>
-        <div className="loading-child"></div>
-        <div className="loading-child"></div>
-        <div className="loading-child"></div>
-        <div className="loading-child"></div>
-        <div className="loading-child"></div>
-        <div className="loading-child"></div>
-        <div className="loading-child"></div>
-        <div className="loading-child"></div>
-        <div className="loading-child"></div>
-        <div className="loading-child"></div>
-        <div className="loading-child"></div>
-        <div className="loading-child"></div>
-        <div className="loading-child"></div>
-        <div className="loading-child"></div>
-        <div className="loading-child"></div>
-        <div className="loading-child"></div>
-        <div className="loading-child"></div>
-        <div className="loading-child"></div>
-        <div className="loading-child"></div>
+      <section className="hero">
+  
+        <div className="container">
 
-        <h2 className="title is-6 heading">No result found. Return <Link to="/">home </Link> </h2>
-      </div>
+          <div id="notfound">
+            <figure className="image  is-1by1">
+              <img src="https://media.giphy.com/media/l0D7flJ449F3aPaik/giphy.gif" alt="Loading" />
+            </figure>
+            <h2 className="title is-6 heading has-text-centered">No result found. Return <Link to="/">home </Link> </h2>
+          </div>
+     
+        </div>
+
+      </section>
+
+        
+   
     )
   }
 

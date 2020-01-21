@@ -26,18 +26,18 @@ class ShowMeal extends React.Component {
       .then(res => this.setState({ meal: res.data.meals[0]
       }, () => {
         this.handleIngredients()
-        this.detectmob()
+        this.highlightChecker()
       })
       )
   }
 
-  detectmob() {
-    if (window.innerWidth <= 800 && window.innerHeight <= 600) {
-      return false
-    } else {
-      this.highlightChecker()
-    }
-  }
+  // detectmob() {
+  //   if (window.innerWidth <= 800 && window.innerHeight <= 600) {
+  //     return false
+  //   } else {
+  //     this.highlightChecker()
+  //   }
+  // }
 
 
   handleIngredients(){
@@ -61,24 +61,24 @@ class ShowMeal extends React.Component {
 
   addFavs(){    
     var names = []
-    names = JSON.parse(localStorage.getItem('names')) || []
+    names = JSON.parse(window.localStorage.getItem('names')) || []
     names.push(this.state.meal.idMeal)
-    names = localStorage.setItem('names', JSON.stringify(names))
+    names = window.localStorage.setItem('names', JSON.stringify(names))
     toast.success('You favourited ' + this.state.meal.strMeal )
     this.setState({ names, active: !this.state.active, unactive: !this.state.unactive })
   }
 
 
   removeFav(){
-    var names = JSON.parse(localStorage.getItem('names'))
+    var names = JSON.parse(window.localStorage.getItem('names'))
     names = names.filter(item => item !== this.state.meal.idMeal)
-    names = localStorage.setItem('names', JSON.stringify(names))
+    names = window.localStorage.setItem('names', JSON.stringify(names))
     toast.info('You unfavourited ' + this.state.meal.strMeal)
     this.setState({ names, unactive: !this.state.unactive, active: !this.state.active  })
   }
 
   highlightChecker(){
-    var names = JSON.parse(localStorage.getItem('names'))
+    var names = JSON.parse(window.localStorage.getItem('names'))
     if(names.includes(this.state.meal.idMeal)){
       this.setState({ names, unactive: !this.state.unactive, active: !this.state.active })
     }

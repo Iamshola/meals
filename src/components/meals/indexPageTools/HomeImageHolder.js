@@ -51,6 +51,7 @@ const HomeImageHolder = ({ strMealThumb, idMeal, strMeal }) => {
             <button className="button is-warning title is-6">See The Reciepe </button>
           </div>
         </Link>
+        <br />
       </div>
  
 
