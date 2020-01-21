@@ -26,10 +26,19 @@ class ShowMeal extends React.Component {
       .then(res => this.setState({ meal: res.data.meals[0]
       }, () => {
         this.handleIngredients()
-        this.highlightChecker()
+        this.detectmob()
       })
       )
   }
+
+  detectmob() {
+    if (window.innerWidth <= 800 && window.innerHeight <= 600) {
+      return true
+    } else {
+      this.highlightChecker()
+    }
+  }
+
 
   handleIngredients(){
     const ingredients = [this.state.meal.strIngredient1, this.state.meal.strIngredient2, this.state.meal.strIngredient3, this.state.meal.strIngredient4, this.state.meal.strIngredient5, this.state.meal.strIngredient6, this.state.meal.strIngredient7, this.state.meal.strIngredient8, this.state.meal.strIngredient9, this.state.meal.strIngredient10, this.state.meal.strIngredient11, this.state.meal.strIngredient12, this.state.meal.strIngredient13, this.state.meal.strIngredient14, this.state.meal.strIngredient15, this.state.meal.strIngredient16, this.state.meal.strIngredient17, this.state.meal.strIngredient18, this.state.meal.strIngredient19, 
@@ -75,13 +84,6 @@ class ShowMeal extends React.Component {
     }
   }
 
-  // detectmob() {
-  //   if (window.innerWidth <= 800 && window.innerHeight <= 600) {
-  //     return true
-  //   } else {
-  //     this.highlightChecker()
-  //   }
-  // }
 
   render(){
     console.log(this.state.meal)
