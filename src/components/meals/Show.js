@@ -43,8 +43,8 @@ class ShowMeal extends React.Component {
         c.push(ingredients[i] + ', ' + portion[i])
       }
     }
-    let displayIngredients = c.filter(item => item !== ',  ' && item !== ', ' && item !== ', null')
-
+    let displayIngredients = c.filter(item => item !== ',  ' && item !== ', ' && item !== 'null, null')
+    console.log(displayIngredients)
     displayIngredients = displayIngredients.map(word => word[0].toUpperCase() + word.slice(1).toLowerCase())
 
     return displayIngredients
@@ -88,68 +88,55 @@ class ShowMeal extends React.Component {
     if (!this.state.meal || !this.state.meal.strTags) return null
     return(
       <section className="section">
-         
         <div className="container">
+          <div className="columns">
+            <div className="column">
+              <figure className="image">
+                <img src={this.state.meal.strMealThumb} alt={this.state.meal.strMeal} />
+              </figure>
+            </div>
 
-          {/* <section> */}
-          {/* <div className="hero-body"> */}
-          {/* <div className="container"> */}
-          <figure className="image is-16by9">
-            <img src={this.state.meal.strMealThumb} alt={this.state.meal.strMeal} />
-          </figure>
-              
-          {/* </div> */}
-          {/* </div> */}
-          {/* </section> */}
-          
-
-          <div className="container">
             <ToastContainer />
-            <div className="columns">
-              {/* <div className="column">
-                {/* <figure className="image show-page">
-                  <img src={this.state.meal.strMealThumb} alt={this.state.meal.strMeal} />
-                </figure> */}
-              {/* </div> */}
-              
-             
-              <div className="column">
-                <div className="title is-1 has-text-centered">{this.state.meal.strMeal}</div>
-                <div className="has-text-centered">
-                  {this.state.active && <button className="button is-primary" value={this.state.meal.idMeal} onClick={this.addFavs}> Save this for later!</button> }
-                  {this.state.unactive && <button className="button is-warning" onClick={this.removeFav}>Remove </button>}
-  
-                </div> 
+         
+            <div className="column">
+              <div className="title is-1 has-text-centered">{this.state.meal.strMeal}</div>
+              <div className="has-text-centered">
+                {this.state.active && <button className="button is-primary" value={this.state.meal.idMeal} onClick={this.addFavs}> Save this for later!</button> }
+                {this.state.unactive && <button className="button is-warning" onClick={this.removeFav}>Remove </button>}
                 <br />
-
+                <br />
+  
+            
                 <p className="title is-5 has-text-centered">{this.state.meal.strTags.split(',').join(', ')}</p>
                 <Link to={`/countries/${this.state.meal.strArea}`}>
                   <p className="title is-5 has-text-centered"> {this.state.meal.strArea} </p>
                 </Link>
                 <hr />
-                <p className="title is-3 has-text-centered">Ingredients:</p>
-                <ul>
-                  {this.handleIngredients().map((item, index) =>
-                    <li key={index} className="has-text-centered">{item}</li>
-                  )}
-                </ul>
               </div>
-            </div>
-
-            <hr />
-            <div className="column">
-
-              <p className="title is-4 has-text-centered">Instructions:</p>
-              <p className="is-7 has-text-centered">{this.state.meal.strInstructions}</p>
+        
               <br />
-              <Box
-                name={this.state.meal.strMeal}
-                strYoutube={this.state.meal.strYoutube}
-              />
+              <p className="title is-3 has-text-centered">Ingredients:</p>
+              <ul>
+                {this.handleIngredients().map((item, index) =>
+                  <li key={index} className="has-text-centered">{item}</li>
+                )}
+              </ul>
             </div>
           </div>
+        </div>            
+        <hr />
+        <div className="column">
+
+          <p className="title is-4 has-text-centered">Instructions:</p>
+          <p className="is-7 has-text-centered">{this.state.meal.strInstructions}</p>
+          <br />
+          <Box
+            name={this.state.meal.strMeal}
+            strYoutube={this.state.meal.strYoutube}
+          />
         </div>
-            
+       
+  
  
       </section>
       

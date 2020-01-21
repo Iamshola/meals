@@ -17,7 +17,7 @@ const HomeImageHolder = ({ strMealThumb, idMeal, strMeal }) => {
 
             <div className='player-wrapper'>
               <figure className="image is-4by3">
-                <img src={strMealThumb} alt={name} />
+                <img className="is-rounded" src={strMealThumb} alt={name} />
               </figure>
             </div>
             <br />
