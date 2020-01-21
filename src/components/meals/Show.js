@@ -59,28 +59,52 @@ class ShowMeal extends React.Component {
     return displayIngredients
   }
 
-  addFavs(){    
-    var names = []
-    names = JSON.parse(window.localStorage.getItem('names')) || []
-    names.push(this.state.meal.idMeal)
-    names = window.localStorage.setItem('names', JSON.stringify(names))
-    toast.success('You favourited ' + this.state.meal.strMeal )
-    this.setState({ names, active: !this.state.active, unactive: !this.state.unactive })
+  addFavs() {
+    if (!navigator.userAgent.match(/Android/i)
+      || navigator.userAgent.match(/webOS/i)
+      || navigator.userAgent.match(/iPhone/i)
+      || navigator.userAgent.match(/iPad/i)
+      || navigator.userAgent.match(/iPod/i)
+      || navigator.userAgent.match(/BlackBerry/i)
+      || navigator.userAgent.match(/Windows Phone/i)) {  
+      var names = []
+      names = JSON.parse(window.localStorage.getItem('names')) || []
+      names.push(this.state.meal.idMeal)
+      names = window.localStorage.setItem('names', JSON.stringify(names))
+      toast.success('You favourited ' + this.state.meal.strMeal )
+      this.setState({ names, active: !this.state.active, unactive: !this.state.unactive })
+    }
   }
 
 
   removeFav(){
-    var names = JSON.parse(window.localStorage.getItem('names'))
-    names = names.filter(item => item !== this.state.meal.idMeal)
-    names = window.localStorage.setItem('names', JSON.stringify(names))
-    toast.info('You unfavourited ' + this.state.meal.strMeal)
-    this.setState({ names, unactive: !this.state.unactive, active: !this.state.active  })
+    if (!navigator.userAgent.match(/Android/i)
+      || navigator.userAgent.match(/webOS/i)
+      || navigator.userAgent.match(/iPhone/i)
+      || navigator.userAgent.match(/iPad/i)
+      || navigator.userAgent.match(/iPod/i)
+      || navigator.userAgent.match(/BlackBerry/i)
+      || navigator.userAgent.match(/Windows Phone/i))  {  
+      var names = JSON.parse(window.localStorage.getItem('names'))
+      names = names.filter(item => item !== this.state.meal.idMeal)
+      names = window.localStorage.setItem('names', JSON.stringify(names))
+      toast.info('You unfavourited ' + this.state.meal.strMeal)
+      this.setState({ names, unactive: !this.state.unactive, active: !this.state.active  })
+    }
   }
 
   highlightChecker(){
-    var names = JSON.parse(window.localStorage.getItem('names'))
-    if(names.includes(this.state.meal.idMeal)){
-      this.setState({ names, unactive: !this.state.unactive, active: !this.state.active })
+    if (!navigator.userAgent.match(/Android/i)
+      || navigator.userAgent.match(/webOS/i)
+      || navigator.userAgent.match(/iPhone/i)
+      || navigator.userAgent.match(/iPad/i)
+      || navigator.userAgent.match(/iPod/i)
+      || navigator.userAgent.match(/BlackBerry/i)
+      || navigator.userAgent.match(/Windows Phone/i))  {  
+      var names = JSON.parse(window.localStorage.getItem('names'))
+      if(names.includes(this.state.meal.idMeal)){
+        this.setState({ names, unactive: !this.state.unactive, active: !this.state.active })
+      }
     }
   }
 

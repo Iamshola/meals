@@ -18,7 +18,7 @@ class FavouriteMeals extends React.Component {
 
 
   componentDidMount() {
-    var names = JSON.parse(localStorage.getItem('names'))
+    var names = JSON.parse(window.localStorage.getItem('names'))
     names = names.map(el => +el)
     this.setState({ names }, () => {
       this.getInfoFromStorage()
