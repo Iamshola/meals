@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 import { Link } from 'react-router-dom'
+
 import Box from '../meals/indexPageTools/Box'
 
 class ShowMeal extends React.Component {
@@ -127,8 +128,9 @@ class ShowMeal extends React.Component {
             <div className="column">
               <div className="title is-1 has-text-centered">{this.state.meal.strMeal}</div>
               <div className="has-text-centered">
-                {this.state.active && <button className="button is-primary" value={this.state.meal.idMeal} onClick={this.addFavs}> Save this for later!</button> }
-                {this.state.unactive && <button className="button is-warning" onClick={this.removeFav}>Remove </button>}
+                
+                {this.state.active && <button className="button is-primary" value={this.state.meal.idMeal} onClick={this.addFavs}><i className="fa fa-heart" />  Save this for later!</button> }
+                {this.state.unactive && <button className="button is-danger" onClick={this.removeFav}> <i className="fas fa-heart-broken"/ >Remove this from your favourites </button>}
                 <br />
                 <br />
   

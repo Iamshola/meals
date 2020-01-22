@@ -34,7 +34,7 @@ const HomeImageHolder = ({ strMealThumb, idMeal, strMeal }) => {
           <hr />
           <br />
           <Flash>
-            <h2 className="title is-2 has-text-centered">Our pick</h2>
+            <h2 className="title is-2 has-text-centered">Our Picks</h2>
           </Flash>
 
           <div className="columns is-flex is-centered">
@@ -48,7 +48,7 @@ const HomeImageHolder = ({ strMealThumb, idMeal, strMeal }) => {
         <h1 className="title is-5 heading has-text-centered">{strMeal}</h1>
         <Link to={`/meals/${idMeal}`}>
           <div className="has-text-centered">
-            <button className="button is-warning title is-6">See The Reciepe </button>
+            <button className="button is-warning title is-6">View The Full Recipe </button>
           </div>
         </Link>
         <br />

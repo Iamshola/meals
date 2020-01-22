@@ -1,7 +1,10 @@
+@import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 
 $family-serif: 'Coda', cursive;
 $family-primary: $family-serif;
 $warning: hsl(212, 89%, 82%);
+$primary: hsl(323, 74%, 85%);
+
 
 figure.image.is-16by9 img{
   height: 65%;
@@ -137,6 +140,22 @@ div.hero-body{
   width: 600px !important;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @import '~bulma'
  
