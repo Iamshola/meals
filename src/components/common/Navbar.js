@@ -31,17 +31,18 @@ class Navbar extends React.Component {
 
 
   render(){
+    const detectMob = ((window.innerWidth <= 800) && (window.innerHeight <= 600))
     return(
       <nav className="navbar is-fixed-top">
         <div className="container">
           <div className="navbar-brand title is-6 heading">
             <Link to= "/" className="navbar-item">MEAL4ALL </Link>
          
-            <div className="navbar-item">
+            {!detectMob && <div className="navbar-item">
               <Link to="/favourites" className="navbar-item">
                 favs 💗💗
               </Link>
-            </div>
+            </div>}
             <a role="button" className={`navbar-burger ${this.state.navbarOpen ? 'is-active' : ''} ` } onClick={this.toggleNavbar}>
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>

@@ -15,7 +15,6 @@ class ShowMeal extends React.Component {
       names: [], 
       active: true, 
       unactive: false
-      
     }
     this.handleIngredients = this.handleIngredients.bind(this)
     this.addFavs = this.addFavs.bind(this)
@@ -31,15 +30,6 @@ class ShowMeal extends React.Component {
       })
       )
   }
-
-  // detectmob() {
-  //   if (window.innerWidth <= 800 && window.innerHeight <= 600) {
-  //     return false
-  //   } else {
-  //     this.highlightChecker()
-  //   }
-  // }
-
 
   handleIngredients(){
     const ingredients = [this.state.meal.strIngredient1, this.state.meal.strIngredient2, this.state.meal.strIngredient3, this.state.meal.strIngredient4, this.state.meal.strIngredient5, this.state.meal.strIngredient6, this.state.meal.strIngredient7, this.state.meal.strIngredient8, this.state.meal.strIngredient9, this.state.meal.strIngredient10, this.state.meal.strIngredient11, this.state.meal.strIngredient12, this.state.meal.strIngredient13, this.state.meal.strIngredient14, this.state.meal.strIngredient15, this.state.meal.strIngredient16, this.state.meal.strIngredient17, this.state.meal.strIngredient18, this.state.meal.strIngredient19, 
@@ -60,60 +50,42 @@ class ShowMeal extends React.Component {
     return displayIngredients
   }
 
-  addFavs() {
-    if (!navigator.userAgent.match(/Android/i)
-      || navigator.userAgent.match(/webOS/i)
-      || navigator.userAgent.match(/iPhone/i)
-      || navigator.userAgent.match(/iPad/i)
-      || navigator.userAgent.match(/iPod/i)
-      || navigator.userAgent.match(/BlackBerry/i)
-      || navigator.userAgent.match(/Windows Phone/i)) {  
-      var names = []
-      names = JSON.parse(window.localStorage.getItem('names')) || []
-      names.push(this.state.meal.idMeal)
-      names = window.localStorage.setItem('names', JSON.stringify(names))
-      toast.success('You favourited ' + this.state.meal.strMeal )
-      this.setState({ names, active: !this.state.active, unactive: !this.state.unactive })
-    }
+  addFavs() { 
+    var names = []
+    names = JSON.parse(window.localStorage.getItem('names')) || []
+    names.push(this.state.meal.idMeal)
+    names = window.localStorage.setItem('names', JSON.stringify(names))
+    toast.success('You favourited ' + this.state.meal.strMeal )
+    this.setState({ names, active: !this.state.active, unactive: !this.state.unactive })
+    
   }
 
 
   removeFav(){
-    if (!navigator.userAgent.match(/Android/i)
-      || navigator.userAgent.match(/webOS/i)
-      || navigator.userAgent.match(/iPhone/i)
-      || navigator.userAgent.match(/iPad/i)
-      || navigator.userAgent.match(/iPod/i)
-      || navigator.userAgent.match(/BlackBerry/i)
-      || navigator.userAgent.match(/Windows Phone/i))  {  
-      var names = JSON.parse(window.localStorage.getItem('names'))
-      names = names.filter(item => item !== this.state.meal.idMeal)
-      names = window.localStorage.setItem('names', JSON.stringify(names))
-      toast.info('You unfavourited ' + this.state.meal.strMeal)
-      this.setState({ names, unactive: !this.state.unactive, active: !this.state.active  })
-    }
+    var names = JSON.parse(window.localStorage.getItem('names'))
+    names = names.filter(item => item !== this.state.meal.idMeal)
+    names = window.localStorage.setItem('names', JSON.stringify(names))
+    toast.info('You unfavourited ' + this.state.meal.strMeal)
+    this.setState({ names, unactive: !this.state.unactive, active: !this.state.active  })
   }
+  
 
-  highlightChecker(){
-    if (!navigator.userAgent.match(/Android/i)
-      || navigator.userAgent.match(/webOS/i)
-      || navigator.userAgent.match(/iPhone/i)
-      || navigator.userAgent.match(/iPad/i)
-      || navigator.userAgent.match(/iPod/i)
-      || navigator.userAgent.match(/BlackBerry/i)
-      || navigator.userAgent.match(/Windows Phone/i))  {  
-      var names = JSON.parse(window.localStorage.getItem('names'))
-      if(names.includes(this.state.meal.idMeal)){
-        this.setState({ names, unactive: !this.state.unactive, active: !this.state.active })
-      }
+  highlightChecker(){ 
+    var names = JSON.parse(window.localStorage.getItem('names'))
+    if(names.includes(this.state.meal.idMeal)){
+      this.setState({ names, unactive: !this.state.unactive, active: !this.state.active })
     }
+    
   }
 
 
-  render(){
+  render() {
     console.log(this.state.meal)
+    const detectMob = ((window.innerWidth <= 800) && (window.innerHeight <= 600))
+    console.log(detectMob)
+    
     if (!this.state.meal || !this.state.meal.strTags) return null
-    return(
+    return (
       <section className="section">
         <div className="container">
           <div className="columns">
@@ -124,24 +96,24 @@ class ShowMeal extends React.Component {
             </div>
 
             <ToastContainer />
-         
+
             <div className="column">
               <div className="title is-1 has-text-centered">{this.state.meal.strMeal}</div>
               <div className="has-text-centered">
-                
-                {this.state.active && <button className="button is-primary" value={this.state.meal.idMeal} onClick={this.addFavs}><i className="fa fa-heart" />  Save this for later!</button> }
-                {this.state.unactive && <button className="button is-danger" onClick={this.removeFav}> <i className="fas fa-heart-broken"/ >Remove this from your favourites </button>}
+
+                {!detectMob && this.state.active && <button className="button is-primary" value={this.state.meal.idMeal} onClick={this.addFavs}><i className="fa fa-heart" />  Save this for later!</button>}
+                {!detectMob && this.state.unactive && <button className="button is-danger" onClick={this.removeFav}> <i className="fas fa-heart-broken" />Remove this from your favourites </button>}
                 <br />
                 <br />
-  
-            
+
+
                 <p className="title is-5 has-text-centered">{this.state.meal.strTags.split(',').join(', ')}</p>
                 <Link to={`/countries/${this.state.meal.strArea}`}>
                   <p className="title is-5 has-text-centered"> {this.state.meal.strArea} </p>
                 </Link>
                 <hr />
               </div>
-        
+
               <br />
               <p className="title is-3 has-text-centered">Ingredients:</p>
               <ul>
@@ -151,7 +123,7 @@ class ShowMeal extends React.Component {
               </ul>
             </div>
           </div>
-        </div>            
+        </div>
         <hr />
         <div className="column">
 
@@ -163,12 +135,12 @@ class ShowMeal extends React.Component {
             strYoutube={this.state.meal.strYoutube}
           />
         </div>
-       
-  
- 
+
+
+
       </section>
-      
-     
+
+
     )
   }
 }
