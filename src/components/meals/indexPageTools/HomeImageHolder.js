@@ -2,11 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Jump from 'react-reveal/Jump'
 import Flash from 'react-reveal/Flash'
+import Modal from '../Modal'
 
 
 // import ReactPlayer from 'react-player'
 
-const HomeImageHolder = ({ strMealThumb, idMeal, strMeal }) => {
+const HomeImageHolder = ({ strMealThumb, idMeal, strMeal, showModal }) => {
   return (
     <section className="hero homeImage">
       <div className="hero-body">
@@ -26,39 +27,8 @@ const HomeImageHolder = ({ strMealThumb, idMeal, strMeal }) => {
             <hr />
           </div>
           
-         
-
         </div>
-      
-        <div className="column">
-          <hr />
-          <br />
-          <Flash>
-            <h2 className="title is-2 has-text-centered">Our Picks</h2>
-          </Flash>
-
-          <div className="columns is-flex is-centered">
-            <figure className="image homeImage">
-              <img className="" src={strMealThumb} alt={name} />
-            </figure>
-          </div>
-        </div>
-
-        <br />
-        <h1 className="title is-5 heading has-text-centered">{strMeal}</h1>
-        <Link to={`/meals/${idMeal}`}>
-          <div className="has-text-centered">
-            <button className="button is-warning title is-6">View The Full Recipe </button>
-          </div>
-        </Link>
-        <br />
       </div>
- 
-
-     
-
-  
-  
     </section>
 
   )

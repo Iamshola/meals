@@ -10,6 +10,7 @@ import './style.scss'
 import CategoryIndex from './components/meals/country/CategoryIndex'
 import CountriesIndex from './components/meals/country/CountriesIndex'
 import FavouriteMeals from './components/meals/country/Favourite'
+import Modal from './components/meals/Modal'
 
 
 
@@ -30,6 +31,7 @@ class App extends React.Component {
           <Route path="/categories/:id" component={CategoryIndex} />
           <Route path="/meals/:id" component={ShowMeal} />
           <Route path="/search/:meal" component={MealsIndex} />
+          <Route path="/meal-of-the-day" component={Modal} />
           <Route exact path="/" component={Home} />
         </Switch>
       </HashRouter>

@@ -1,5 +1,6 @@
 import React from 'react'
 
+// const allIngredients = ['Sugar', 'Eggs', 'Flour', 'Nuts']
 
 const Checkboxes = ({ onChange, onClick }) => {
   return (

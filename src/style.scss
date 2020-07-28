@@ -1,6 +1,6 @@
 @import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 
-$family-serif: 'Coda', cursive;
+$family-serif: 'Roboto', sans-serif;
 $family-primary: $family-serif;
 $warning: hsl(212, 89%, 82%);
 $primary: hsl(323, 74%, 85%);
@@ -19,6 +19,8 @@ body{
   display: block;
   margin: 0 auto;
 }
+
+
 
 input#search-bar{
   margin: 0 auto;
